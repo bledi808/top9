@@ -86,10 +86,13 @@ body {
     height: 190px;
     width: 190px;
     margin: 1px;
-    padding: 1px;
+    /* padding: 1px; */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    /* align-items: center; */
     /* width: 100%; */
 }
 
@@ -99,8 +102,10 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     height: 380px;
-    width: 380px;
+    width: 345px;
+    background-color: white;
 }
+
 #publish-box {
     color: 380px;
     font-size: 70px;
@@ -116,6 +121,62 @@ body {
     margin: 1px;
     padding: 1px;
     /* width: 100%; */
+}
+
+/* Input fields in AddItems */
+.input {
+    margin-left: 5%;
+    padding-left: 3px;
+    /* margin-right: 4%; */
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #383838;
+    font-family: inherit;
+    font-size: 90%;
+    height: 1.5em;
+    width: 120px;
+    /* border-right: 1px black solid; */
+    /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
+}
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    /* margin-left: 5%; */
+}
+
+.input-file + label {
+    border: 1px solid #383838;
+    /* font-family: inherit; */
+    font-size: 90%;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.input-file:focus + label {
+    outline: -webkit-focus-ring-color auto 5px;
+}
+.add-item-button:hover {
+    background-color: #383838;
+    color: white;
+    /* border: 1px  tomato solid;
+    color:tomato; */
+}
+
+.add-item-button {
+    border-radius: 0;
+    border: none;
+    border: 1px solid #383838;
+    background-color: white;
+    font-family: inherit;
+    font-size: 90%;
+    cursor: pointer;
+    color: #383838;
+    margin: 0 5%;
 }
 
 /* background-color: #e8e8e8;

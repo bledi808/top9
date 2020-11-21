@@ -17,18 +17,54 @@ export default function AddList() {
     useEffect(() => {
         dispatch(getList());
     }, []);
+
+    const submit = () => {
+        console.log("CreateList about to submit");
+        dispatch(createList(values));
+        // location.replace("/addItems");
+        // setGrid(true);
+        ///////// how to clear set the input values? e.target.value = "";
+    };
+
     return (
         <>
             <div id="add-items-container">
                 <div className="list-item" id="file-box">
-                    <p>Add your list items here</p>
                     {latestList &&
                         latestList.map((list) => (
-                            <div key={list.id} id="friends-component-container">
-                                <div>
-                                    <p>{list.list_name}</p>
-                                    <p>{list.description}</p>
+                            <div key={list.id} id="">
+                                <div id="list-details">
+                                    <p>List Title: {list.list_name}</p>
+                                    <p>Desc: {list.description}</p>
                                 </div>
+                                <div id="item-files">
+                                    <p>Add items to your list</p>
+                                    <div id="item1">
+                                        <input
+                                            onChange={handleChange}
+                                            name="name"
+                                            placeholder="Image 1 name"
+                                            autocomplete="off"
+                                            class="input"
+                                        ></input>
+                                        <input
+                                            onChange={handleChange}
+                                            id="file"
+                                            type="file"
+                                            name="file"
+                                            placeholder="image/*"
+                                            class="input-file"
+                                            data-multiple-caption="{count} files selected"
+                                            multiple
+                                        />
+
+                                        <label id="file-label" for="file">
+                                            Select image
+                                        </label>
+                                        {/* <button @click="uploadImage" class="button">Add image</button>     */}
+                                    </div>
+                                </div>
+
                                 <div id="friends-image-container">
                                     <img
                                         className="friends-image"
@@ -47,7 +83,40 @@ export default function AddList() {
                     <div className="list-item">6</div>
                     <div className="list-item">7</div>
                     <div className="list-item">8</div>
-                    <div className="list-item">9</div>
+                    <div className="list-item">
+                        {/* <div id="item1"> */}
+
+                        <input
+                            onChange={handleChange}
+                            name="name"
+                            placeholder="Name (optional)"
+                            autocomplete="off"
+                            className="input"
+                        ></input>
+                        <input
+                            onChange={handleChange}
+                            id="file"
+                            type="file"
+                            name="file"
+                            placeholder="image/*"
+                            className="input-file"
+                            data-multiple-caption="{count} files selected"
+                            multiple
+                        />
+                        <label
+                            class="add-item-button"
+                            id="file-label"
+                            for="file"
+                        >
+                            Select image
+                        </label>
+                        <button onclick={submit} class="add-item-button">
+                            Add image
+                        </button>
+
+                        {/* <button @click="uploadImage" class="button">Add image</button>     */}
+                        {/* </div> */}
+                    </div>
                 </div>
                 <div id="publish-grid">
                     <div className="list-item" id="publish-box">
