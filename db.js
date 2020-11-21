@@ -77,6 +77,18 @@ module.exports.uploadProfilePic = (profile_img, userId) => {
     );
 };
 
+//insert registration details into users table
+module.exports.createList = (list_name, description, cover, userId) => {
+    return db.query(
+        `
+        INSERT INTO lists (list_name, description, cover, user_id)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+    `,
+        [list_name, description, cover, userId]
+    );
+};
+
 // // db for images table - required for delete account/image from s3 cloud
 // // module.exports.uploadProfilePic = (imgUrl, userId) => {
 // //     return db.query(

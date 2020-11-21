@@ -10,7 +10,7 @@ export function useStatefulFields() {
         });
     };
 
-    console.log("useStatefulFields values: ", values);
+    // console.log("useStatefulFields values: ", values);
 
     return [values, handleChange];
 }

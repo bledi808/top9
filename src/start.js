@@ -17,7 +17,7 @@ const store = createStore(
 );
 
 let elem;
-const userIsLoggedIn = location.pathname != "/welcome"; // evaluates to false in /welcome route bc user is on that route
+const userIsLoggedIn = location.pathname != "/welcome";
 
 if (!userIsLoggedIn) {
     elem = <Welcome />;

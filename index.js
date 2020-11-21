@@ -88,6 +88,23 @@ app.get("/api/user", (req, res) => {
     }
 });
 
+app.post(`/api/createList`, async (req, res) => {
+    console.log("ACCESSED POST /api/createList route ");
+    // console.log("values from req.body", req.body);
+    const { userId } = req.session;
+    const { title, description, file } = req.body;
+    try {
+        let { rows } = await db.createList(title, description, file, userId);
+        console.log("rows", rows);
+        // let list = rows;
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("error in POST / api / createList", err);
+    }
+});
+
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
 app.get("/welcome", (req, res) => {
     console.log("ACCESSED GET /welcome route ");

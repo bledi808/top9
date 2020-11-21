@@ -1,36 +1,26 @@
-// import React from "react";
-// import axios from "./axios";
-// import { Link } from "react-router-dom";
-
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { createList } from "./actions";
+import { addItems, createList } from "./actions";
 import { useStatefulFields } from "../hooks/useStatefulFields";
 
-export default function CreateList() {
+export default function AddList() {
     const [values, handleChange] = useStatefulFields();
     const dispatch = useDispatch();
-    const allFriends = useSelector(
-        (state) => state.friendsList && state.friendsList.filter((user) => user)
-    );
     const newList = useSelector(
         (state) => state.newList && state.newList.filter((user) => user)
     );
 
-    // console.log("newList in CreateList: ", newList);
-    console.log("values: ", values);
-    const submit = () => {
-        console.log("CreateList about to submit");
-        dispatch(createList(values));
-        // how to clear set the input values?
-        // e.target.value = "";
-    };
+    console.log("newList info in AddItems: ", newList);
+    // console.log("values: ", values);
 
-    // render() {
+    useEffect(() => {
+        // dispatch(createList());
+    }, []);
     return (
         <>
-            <div className="main-container" id="main-container-register">
+            <p>Add your list items here</p>
+            {/* <div className="main-container" id="main-container-register">
                 <div id="register">
                     <p>Create a new list</p>
                 </div>
@@ -89,8 +79,7 @@ export default function CreateList() {
                             </div>
                         </div>
                     ))}
-            </div>
-
+            </div> */}
             {/* {this.state.error && (
                     <p className="error-msg">{this.state.error}</p>
                 )} */}

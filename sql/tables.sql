@@ -14,9 +14,11 @@ CREATE TABLE users(
 -- table shoudl allow for selecting urls which belong to the same list (list_name) for a specific user (user_id)
 -- consider how to make list_name/user combo unique - cant do it in table as there will be multiple rows  
 -- corresponds to list details popup (where user enters list name, desc and cover)
+  DROP TABLE IF EXISTS lists CASCADE;
+
   CREATE TABLE lists(
       id SERIAL PRIMARY KEY,
-      list_name INT NOT NULL UNIQUE,
+      list_name VARCHAR(255) NOT NULL,
       description VARCHAR(255),
       cover VARCHAR(255),
       user_id INT REFERENCES users(id) ON DELETE CASCADE,

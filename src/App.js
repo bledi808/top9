@@ -7,6 +7,7 @@ import React from "react";
 // import FindPeople from "./FindPeople";
 // import NavBar from "./NavBar";
 import CreateList from "./CreateList";
+import AddItems from "./AddItems";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -96,6 +97,14 @@ export default class App extends React.Component {
                         >
                             <p>Create List</p>
                         </Link>
+                        <Link
+                            to="/addItems"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <p>Add Items</p>
+                        </Link>
                         <button
                             onClick={this.logOut}
                             // className="navbar-buttons"
@@ -121,6 +130,7 @@ export default class App extends React.Component {
                         </div> */}
                     </header>
                     <Route path="/createList" component={CreateList} />
+                    <Route path="/addItems" component={AddItems} />
                     {/* <div id="app-body">
                         <NavBar logoutButton={() => this.logOut()} />
                         <div id="app-content">

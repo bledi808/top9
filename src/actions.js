@@ -1,17 +1,15 @@
 import axios from "./axios";
 
-// return an object with a type property and the id of the user whose friendship was accepted.
-export async function createList() {
-    console.log("createList dispatch clicked by userId: ");
-    let formData = {}; //work out how to contruct this
+// return an object with a type property and the new list created by the user
+export async function createList(values) {
+    // console.log("values sent from CreateList", values);
+    // let formData = {}; //work out how to contruct this
     try {
-        let { data } = await axios.post(`/api/createList`, {
-            formData,
-        });
+        let { data } = await axios.post(`/api/createList`, values);
         console.log("{data} in createList() action axios", data);
         return {
             type: "CREATE_LIST",
-            id: data,
+            newList: data.rows,
         };
     } catch (err) {
         console.log("err in createList() action axios", err);
