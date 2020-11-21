@@ -129,8 +129,10 @@ export default class App extends React.Component {
                             />
                         </div> */}
                     </header>
-                    <Route path="/createList" component={CreateList} />
-                    <Route path="/addItems" component={AddItems} />
+                    <div id="app-body">
+                        <Route path="/createList" component={CreateList} />
+                        <Route path="/addItems" component={AddItems} />
+                    </div>
                     {/* <div id="app-body">
                         <NavBar logoutButton={() => this.logOut()} />
                         <div id="app-content">

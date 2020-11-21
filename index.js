@@ -101,7 +101,23 @@ app.post(`/api/createList`, async (req, res) => {
             rows,
         });
     } catch (err) {
-        console.log("error in POST / api / createList", err);
+        console.log("err in POST / api / createList", err);
+    }
+});
+app.get(`/api/getList`, async (req, res) => {
+    console.log("ACCESSED GET /api/getList route ");
+    // console.log("values from req.body", req.body);
+    const { userId } = req.session;
+    // const { title, description, file } = req.body;
+    try {
+        let { rows } = await db.getList(userId);
+        console.log("rows in getList", rows);
+        // let list = rows;
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in GET /api/getList", err);
     }
 });
 

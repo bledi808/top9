@@ -15,6 +15,20 @@ export async function createList(values) {
         console.log("err in createList() action axios", err);
     }
 }
+export async function getList() {
+    console.log("getList() dispatched from AddItems");
+    // let formData = {}; //work out how to contruct this
+    try {
+        let { data } = await axios.get(`/api/getList`);
+        console.log("{data} in getList() action axios", data);
+        return {
+            type: "GET_LIST",
+            latestList: data.rows,
+        };
+    } catch (err) {
+        console.log("err in getList() action axios", err);
+    }
+}
 
 // App ComponentDidMount axios - refactor later (does this need to be wrapped in an async function)
 // try {

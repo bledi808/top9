@@ -4,7 +4,11 @@ export default function (state = {}, action) {
             newList: action.newList,
         });
     }
-
+    if (action.type == "GET_LIST") {
+        state = Object.assign({}, state, {
+            latestList: action.latestList,
+        });
+    }
     // updates state with ACCEPT friend (adds user to Accepted friendList and removes from receivedRequests)
     // if (action.type == "ACCEPT_FRIEND") {
     //     state = {

@@ -89,6 +89,18 @@ module.exports.createList = (list_name, description, cover, userId) => {
     );
 };
 
+module.exports.getList = (userId) => {
+    return db.query(
+        `
+        SELECT * FROM lists 
+        WHERE user_id=$1 
+        ORDER BY id
+        DESC LIMIT 1
+    `,
+        [userId]
+    );
+};
+
 // // db for images table - required for delete account/image from s3 cloud
 // // module.exports.uploadProfilePic = (imgUrl, userId) => {
 // //     return db.query(
