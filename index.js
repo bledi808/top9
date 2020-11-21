@@ -321,6 +321,13 @@ app.post("/reset/verify", (req, res) => {
     }
 });
 
+app.get("/api/logout", (req, res) => {
+    console.log("ACCESSED GET /api/logout route ");
+
+    req.session = null;
+    res.redirect("*");
+});
+
 //it is important that the * route is the LAST GET route
 app.get("*", function (req, res) {
     console.log("ACCESSED catch-all * route ");

@@ -63,12 +63,12 @@ export default class App extends React.Component {
     //         // console.log("state in App after UpdateBioInApp", this.state);
     //     };
     // }
-    // logOut() {
-    //     // console.log("logout clicked");
-    //     axios.get("/api/logout").then(() => {
-    //         location.replace("/welcome#/login");
-    //     });
-    // }
+    logOut() {
+        // console.log("logout clicked");
+        axios.get("/api/logout").then(() => {
+            location.replace("/welcome#/login");
+        });
+    }
 
     // deleteAccount() {
     //     // console.log("delete Acct clicked");
@@ -88,6 +88,20 @@ export default class App extends React.Component {
                 <div id="app-container">
                     <header id="app-header">
                         Hello {this.state.first} {this.state.last}
+                        <Link
+                            to="/createList"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <p>Create List</p>
+                        </Link>
+                        <button
+                            onClick={this.logOut}
+                            // className="navbar-buttons"
+                        >
+                            Log Out
+                        </button>
                         {/* <Link
                             to="/"
                             style={{
@@ -106,7 +120,7 @@ export default class App extends React.Component {
                             />
                         </div> */}
                     </header>
-                    {/* <Route path="/createList" component={CreateList} /> */}
+                    <Route path="/createList" component={CreateList} />
                     {/* <div id="app-body">
                         <NavBar logoutButton={() => this.logOut()} />
                         <div id="app-content">
