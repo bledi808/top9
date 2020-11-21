@@ -62,6 +62,32 @@ app.use(function (req, res, next) {
     next();
 });
 
+//////////////////////////////////////// LOGGED IN ROUTES ///////////////////////////////////////
+app.get("/api/user", (req, res) => {
+    console.log("ACCESSED GET /api/user route ");
+    let { userId } = req.session;
+    if (userId) {
+        db.getUserInfo(userId)
+            .then(({ rows }) => {
+                // console.log("rows in GET /user", rows);
+                res.json({
+                    success: true,
+                    rows: rows[0],
+                });
+            })
+            .catch((err) => {
+                "err in GET /user with getUserInfo()", err;
+                res.json({
+                    success: false,
+                    errorMsg: "Server error: Could not find user details",
+                });
+            });
+    } else {
+        //user is not logged in
+        res.redirect("/");
+    }
+});
+
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
 app.get("/welcome", (req, res) => {
     console.log("ACCESSED GET /welcome route ");

@@ -10,10 +10,45 @@ CREATE TABLE users(
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
-  CREATE TABLE images(
+
+-- table shoudl allow for selecting urls which belong to the same list (list_name) for a specific user (user_id)
+-- consider how to make list_name/user combo unique - cant do it in table as there will be multiple rows  
+-- corresponds to list details popup (where user enters list name, desc and cover)
+  CREATE TABLE lists(
       id SERIAL PRIMARY KEY,
-      url VARCHAR(255),
+      list_name INT NOT NULL UNIQUE,
+      description VARCHAR(255),
+      cover VARCHAR(255),
       user_id INT REFERENCES users(id) ON DELETE CASCADE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+-- each upladed item will be added as a row to list items (i.e. multiple rows will belong to same list by user)
+-- items will be connected to a specific list by list_id (UNIQUE) (NOT SURE HOW TO PASS THIS DOWN) / use list_name if not possible to use list_id
+-- corresponds to input fields for images (i.e. the squares)
+CREATE TABLE list_items(
+      id SERIAL PRIMARY KEY,
+      list_id INT REFERENCES lists(id) ON DELETE CASCADE,
+      description VARCHAR(255),
+      -- list_name INT REFERENCES lists(list_name) ON DELETE CASCADE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+
+
+
+
+
+
+-- // IF ABOVE APPROACH DOES NOT WORK, SEPARATE OUT THE IMAGES FROM THE LISTS TABLE
+    CREATE TABLE (
+      id SERIAL PRIMARY KEY,
+      list_id INT REFERENCES lists(id) ON DELETE CASCADE,
+      user_id INT REFERENCES users(id) ON DELETE CASCADE,
+      url_1 VARCHAR(255),
+      url_2 VARCHAR(255),
+      url_3 VARCHAR(255),
+      url_4 VARCHAR(255),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
