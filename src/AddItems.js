@@ -89,7 +89,7 @@ export default function AddList() {
                         <input
                             onChange={handleChange}
                             name="name"
-                            placeholder="Name (optional)"
+                            placeholder="Name (Optional)"
                             autocomplete="off"
                             className="input"
                         ></input>
@@ -108,10 +108,10 @@ export default function AddList() {
                             id="file-label"
                             for="file"
                         >
-                            Select image
+                            Select item
                         </label>
                         <button onclick={submit} class="add-item-button">
-                            Add image
+                            Load item
                         </button>
 
                         {/* <button @click="uploadImage" class="button">Add image</button>     */}
