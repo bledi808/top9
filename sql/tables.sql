@@ -28,10 +28,13 @@ CREATE TABLE users(
 -- each upladed item will be added as a row to list items (i.e. multiple rows will belong to same list by user)
 -- items will be connected to a specific list by list_id (UNIQUE) (NOT SURE HOW TO PASS THIS DOWN) / use list_name if not possible to use list_id
 -- corresponds to input fields for images (i.e. the squares)
+DROP TABLE IF EXISTS list_items CASCADE;
+
 CREATE TABLE list_items(
       id SERIAL PRIMARY KEY,
       list_id INT REFERENCES lists(id) ON DELETE CASCADE,
-      description VARCHAR(255),
+      url VARCHAR(255),
+      user_id INT REFERENCES users(id) ON DELETE CASCADE,
       -- list_name INT REFERENCES lists(list_name) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );

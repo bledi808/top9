@@ -102,6 +102,18 @@ module.exports.getList = (userId) => {
     );
 };
 
+//Insert individual items into list_items, items will be tied together by list_id
+module.exports.addItems = (list_id, url, user_id) => {
+    return db.query(
+        `
+        INSERT INTO list_items (list_id, url, user_id)
+        VALUES ($1, $2, $3)
+        RETURNING *
+    `,
+        [list_id, url, user_id]
+    );
+};
+
 // // db for images table - required for delete account/image from s3 cloud
 // // module.exports.uploadProfilePic = (imgUrl, userId) => {
 // //     return db.query(

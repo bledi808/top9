@@ -32,28 +32,18 @@ export async function getList() {
 
 export async function addItems(values) {
     // console.log("addItems() dispatched from AddItems");
-    // console.log("values sent from AddItems", values);
-    // // console.log("file sent from AddItems", files.file1);
-    // console.log("listId sent from AddItems", values.listId);
-    // console.log("file sent from AddItems", values.file1);
     let { file1 } = values.files;
     let { listId } = values;
-
     let formData = new FormData();
     formData.append("file", file1);
-
-    // var formData = new FormData();
-    // formData.append("title", this.title);
-    // formData.append("description", this.description);
-    // formData.append("username", this.username);
-    // formData.append("file", this.file);
-
+    formData.append("listId", listId);
     try {
-        let { data } = await axios.post(`/api/addItems`, formData, listId);
+        let { data } = await axios.post(`/api/addItems`, formData);
         console.log("{data} in addItems() action axios", data);
+        console.log("{data} in addItems() action axios", data.rows);
         return {
             type: "ADD_ITEMS",
-            newList: data.rows,
+            listItems: data.rows,
         };
     } catch (err) {
         console.log("err in addItems() action axios", err);

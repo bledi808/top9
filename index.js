@@ -62,6 +62,11 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(
+    express.urlencoded({
+        extended: false,
+    })
+);
 //////////////////////////////////////// LOGGED IN ROUTES ///////////////////////////////////////
 app.get("/api/user", (req, res) => {
     console.log("ACCESSED GET /api/user route ");
@@ -122,33 +127,41 @@ app.get(`/api/getListDetails`, async (req, res) => {
     }
 });
 
-app.post("/api/addItems", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("ACCESSED POST /api/addItems route ");
-    console.log("values from addItems action req.body", req.body);
-    // const { userId } = req.session;
-    // const { title, description, file } = req.body;
-    const { filename } = req.file;
-    const url = s3Url + filename;
-    console.log("url:", url);
+app.post(
+    "/api/addItems",
+    uploader.single("file"),
+    s3.upload,
+    async (req, res) => {
+        console.log("ACCESSED POST /api/addItems route ");
+        const { userId } = req.session;
+        const { listId } = req.body;
+        const { filename } = req.file;
+        const url = s3Url + filename;
 
-    // if (req.file) {
-    //     try {
-    //         let { rows } = await db.addItems(list_id, userId, url, name);
-    //         console.log("rows", rows);
-    //         // let list = rows;
-    //         res.json({
-    //             // rows,
-    //         });
-    //     } catch (err) {
-    //         console.log("err in with db.addItems() in api/addItems", err);
-    //     }
-    // } else {
-    //     res.json({
-    //         success: false,
-    //         errorMsg: "Please select a file",
-    //     });
-    // }
-});
+        console.log("userId:", userId);
+        console.log("listId:", listId);
+        console.log("filename:", filename);
+        console.log("url:", url);
+
+        if (req.file) {
+            try {
+                let { rows } = await db.addItems(listId, url, userId);
+                console.log("rows", rows);
+                // let list = rows;
+                res.json({
+                    rows,
+                });
+            } catch (err) {
+                console.log("err in with db.addItems() in api/addItems", err);
+            }
+        } else {
+            res.json({
+                success: false,
+                errorMsg: "Please select a file",
+            });
+        }
+    }
+);
 
 // app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 //     console.log("ACCESSED POST /upload route ");

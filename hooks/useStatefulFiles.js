@@ -11,7 +11,7 @@ export function useStatefulFiles() {
         });
     };
 
-    console.log("useStatefulFiles file: ", files);
+    // console.log("useStatefulFiles file: ", files);
 
     return [files, handleChangeFiles];
 }

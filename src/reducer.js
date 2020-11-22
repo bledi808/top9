@@ -4,11 +4,23 @@ export default function (state = {}, action) {
             newList: action.newList,
         });
     }
+
     if (action.type == "GET_LIST") {
         state = Object.assign({}, state, {
             latestList: action.latestList,
         });
     }
+
+    if (action.type == "ADD_ITEMS") {
+        // state = Object.assign({}, state, {
+        //     listItems: action.listItems,
+        // });
+        state = {
+            ...state,
+            chatMessages: [...state.listItems, action.listItems],
+        };
+    }
+
     // updates state with ACCEPT friend (adds user to Accepted friendList and removes from receivedRequests)
     // if (action.type == "ACCEPT_FRIEND") {
     //     state = {
