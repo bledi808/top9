@@ -89,6 +89,7 @@ module.exports.createList = (list_name, description, cover, userId) => {
     );
 };
 
+//SELECT latest list for the user - ie. teh one user just created and will add items to
 module.exports.getList = (userId) => {
     return db.query(
         `

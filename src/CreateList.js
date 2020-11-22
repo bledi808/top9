@@ -70,7 +70,7 @@ export default function CreateList() {
                             type="file"
                             name="file"
                             placeholder="image/*"
-                            className="input-file"
+                            // className="input-file"
                         />
                         <div id="reg-actions">
                             <button
@@ -87,7 +87,7 @@ export default function CreateList() {
                     </div>
                 </div>
             </div>
-            <div id="friends-layout">
+            {/* <div id="friends-layout">
                 {newList &&
                     newList.map((list) => (
                         <div key={list.id} id="friends-component-container">
@@ -103,11 +103,11 @@ export default function CreateList() {
                             </div>
                         </div>
                     ))}
-            </div>
+            </div> */}
 
             {/* {this.state.error && (
                     <p className="error-msg">{this.state.error}</p>
-                )} */}
+            )} */}
         </>
     );
 }

@@ -64,7 +64,7 @@ body {
     /* height: 570px; */
     /* width: 570px; */
     /* padding: 0 1%; */
-    background-color: white;
+    /* background-color: white; */
     /* display: flex; */
     align-items: center;
     /* overflow-x: scroll; */
@@ -91,6 +91,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+
     /* width: 100%; */
 }
 

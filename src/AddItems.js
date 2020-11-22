@@ -3,24 +3,25 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItems, getList } from "./actions";
 import { useStatefulFields } from "../hooks/useStatefulFields";
+import { useStatefulFiles } from "../hooks/useStatefulFiles";
 
 export default function AddList() {
     const [values, handleChange] = useStatefulFields();
+    const [files, handleChangeFiles] = useStatefulFiles();
     const dispatch = useDispatch();
     const latestList = useSelector(
         (state) => state.latestList && state.latestList.filter((user) => user)
     );
-
-    console.log("latestList info in AddItems: ", latestList);
-    // console.log("values: ", values);
 
     useEffect(() => {
         dispatch(getList());
     }, []);
 
     const submit = () => {
-        console.log("CreateList about to submit");
-        dispatch(createList(values));
+        console.log("AddItems about to submit");
+        let listId = latestList[0].id;
+        dispatch(addItems({ files, listId }));
+        // dispatch(addItems({ file: values.file, listId: latestList[0].id }));
         // location.replace("/addItems");
         // setGrid(true);
         ///////// how to clear set the input values? e.target.value = "";
@@ -39,30 +40,6 @@ export default function AddList() {
                                 </div>
                                 <div id="item-files">
                                     <p>Add items to your list</p>
-                                    <div id="item1">
-                                        <input
-                                            onChange={handleChange}
-                                            name="name"
-                                            placeholder="Image 1 name"
-                                            autocomplete="off"
-                                            class="input"
-                                        ></input>
-                                        <input
-                                            onChange={handleChange}
-                                            id="file"
-                                            type="file"
-                                            name="file"
-                                            placeholder="image/*"
-                                            class="input-file"
-                                            data-multiple-caption="{count} files selected"
-                                            multiple
-                                        />
-
-                                        <label id="file-label" for="file">
-                                            Select image
-                                        </label>
-                                        {/* <button @click="uploadImage" class="button">Add image</button>     */}
-                                    </div>
                                 </div>
 
                                 <div id="friends-image-container">
@@ -75,48 +52,99 @@ export default function AddList() {
                         ))}
                 </div>
                 <div id="grid-layout">
-                    <div className="list-item">1</div>
-                    <div className="list-item">2</div>
-                    <div className="list-item">3</div>
-                    <div className="list-item">4</div>
-                    <div className="list-item">5</div>
-                    <div className="list-item">6</div>
-                    <div className="list-item">7</div>
-                    <div className="list-item">8</div>
                     <div className="list-item">
-                        {/* <div id="item1"> */}
-
                         <input
                             onChange={handleChange}
-                            name="name"
+                            name="name1"
                             placeholder="Name (Optional)"
-                            autocomplete="off"
+                            autoComplete="off"
                             className="input"
                         ></input>
                         <input
-                            onChange={handleChange}
-                            id="file"
+                            onChange={handleChangeFiles}
+                            id="file1"
                             type="file"
-                            name="file"
+                            name="file1"
                             placeholder="image/*"
                             className="input-file"
                             data-multiple-caption="{count} files selected"
                             multiple
                         />
                         <label
-                            class="add-item-button"
+                            className="add-item-button"
                             id="file-label"
-                            for="file"
+                            htmlFor="file1"
                         >
                             Select item
                         </label>
-                        <button onclick={submit} class="add-item-button">
+                        <button onClick={submit} className="add-item-button">
                             Load item
                         </button>
-
-                        {/* <button @click="uploadImage" class="button">Add image</button>     */}
-                        {/* </div> */}
                     </div>
+                    <div className="list-item">
+                        <input
+                            onChange={handleChange}
+                            name="name2"
+                            placeholder="Name (Optional)"
+                            autoComplete="off"
+                            className="input"
+                        ></input>
+                        <input
+                            onChange={handleChangeFiles}
+                            id="file2"
+                            type="file"
+                            name="file2"
+                            placeholder="image/*"
+                            className="input-file"
+                            data-multiple-caption="{count} files selected"
+                            multiple
+                        />
+                        <label
+                            className="add-item-button"
+                            id="file-label"
+                            htmlFor="file2"
+                        >
+                            Select item
+                        </label>
+                        <button onClick={submit} className="add-item-button">
+                            Load item
+                        </button>
+                    </div>
+                    <div className="list-item">
+                        <input
+                            onChange={handleChange}
+                            name="name3"
+                            placeholder="Name (Optional)"
+                            autoComplete="off"
+                            className="input"
+                        ></input>
+                        <input
+                            onChange={handleChangeFiles}
+                            id="file3"
+                            type="file"
+                            name="file3"
+                            placeholder="image/*"
+                            className="input-file"
+                            data-multiple-caption="{count} files selected"
+                            multiple
+                        />
+                        <label
+                            className="add-item-button"
+                            id="file-label"
+                            htmlFor="file3"
+                        >
+                            Select item
+                        </label>
+                        <button onClick={submit} className="add-item-button">
+                            Load item
+                        </button>
+                    </div>
+                    <div className="list-item">4</div>
+                    <div className="list-item">5</div>
+                    <div className="list-item">6</div>
+                    <div className="list-item">7</div>
+                    <div className="list-item">8</div>
+                    <div className="list-item">9</div>
                 </div>
                 <div id="publish-grid">
                     <div className="list-item" id="publish-box">

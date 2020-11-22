@@ -104,14 +104,15 @@ app.post(`/api/createList`, async (req, res) => {
         console.log("err in POST / api / createList", err);
     }
 });
-app.get(`/api/getList`, async (req, res) => {
+
+app.get(`/api/getListDetails`, async (req, res) => {
     console.log("ACCESSED GET /api/getList route ");
     // console.log("values from req.body", req.body);
     const { userId } = req.session;
     // const { title, description, file } = req.body;
     try {
         let { rows } = await db.getList(userId);
-        console.log("rows in getList", rows);
+        // console.log("rows in getList", rows);
         // let list = rows;
         res.json({
             rows,
@@ -120,6 +121,64 @@ app.get(`/api/getList`, async (req, res) => {
         console.log("err in GET /api/getList", err);
     }
 });
+
+app.post("/api/addItems", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("ACCESSED POST /api/addItems route ");
+    console.log("values from addItems action req.body", req.body);
+    // const { userId } = req.session;
+    // const { title, description, file } = req.body;
+    const { filename } = req.file;
+    const url = s3Url + filename;
+    console.log("url:", url);
+
+    // if (req.file) {
+    //     try {
+    //         let { rows } = await db.addItems(list_id, userId, url, name);
+    //         console.log("rows", rows);
+    //         // let list = rows;
+    //         res.json({
+    //             // rows,
+    //         });
+    //     } catch (err) {
+    //         console.log("err in with db.addItems() in api/addItems", err);
+    //     }
+    // } else {
+    //     res.json({
+    //         success: false,
+    //         errorMsg: "Please select a file",
+    //     });
+    // }
+});
+
+// app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+//     console.log("ACCESSED POST /upload route ");
+//     const { userId } = req.session;
+//     const { filename } = req.file;
+//     const url = s3Url + filename;
+
+// if (req.file) {
+//     db.uploadProfilePic(url, userId)
+//         .then(({ rows }) => {
+//             console.log("POST /upload response", rows[0].url);
+//             res.json(rows[0].url);
+//         })
+//         .catch((err) => {
+//             console.log(
+//                 "error in POST /upload with uploadProfilePic()",
+//                 err
+//             );
+//             res.json({
+//                 success: false,
+//                 errorMsg: "Server error: Could not upload profile picture",
+//             });
+//         });
+// } else {
+//     res.json({
+//         success: false,
+//         errorMsg: "Please select a file",
+//     });
+// }
+// });
 
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
 app.get("/welcome", (req, res) => {
@@ -364,7 +423,7 @@ app.get("/api/logout", (req, res) => {
 //it is important that the * route is the LAST GET route
 app.get("*", function (req, res) {
     console.log("ACCESSED catch-all * route ");
-    console.log("req.session at *", req.session);
+    // console.log("req.session at *", req.session);
     let { userId } = req.session;
     if (!userId) {
         res.redirect("/welcome");
