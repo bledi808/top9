@@ -36,21 +36,22 @@ export async function addItems(values) {
     let { file1 } = values.files;
     let { listId } = values;
     let { itemOrder } = values;
-    console.log(listId);
+    // console.log(listId);
     let formData = new FormData();
     formData.append("file", file1);
     formData.append("listId", listId);
     formData.append("itemOrder", itemOrder);
 
-    console.log("form data: ", formData);
+    // console.log("form data: ", formData);
 
     try {
         let { data } = await axios.post(`/api/addItems`, formData);
-        console.log("{data} in addItems() action axios", data);
+        // console.log("{data} in addItems() action axios", data);
         console.log("{data} in addItems() action axios", data.rows);
         return {
             type: "ADD_ITEMS",
             listItems: data.rows,
+            // itemOrder: data.rows.item_order,
         };
     } catch (err) {
         console.log("err in addItems() action axios", err);

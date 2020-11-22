@@ -99,6 +99,7 @@ export default function AddList() {
                             {listItems && listItems[0] && (
                                 <img id="grid-image" src={listItems[0].url} />
                             )}
+
                             <input
                                 onChange={handleChange}
                                 name="name1"
