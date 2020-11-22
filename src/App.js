@@ -1,7 +1,7 @@
 import React from "react";
 // import Logo from "./Logo"; // create logo component
 // import Uploader from "./Uploader";
-// import ProfilePic from "./ProfilePic";
+import ProfilePic from "./ProfilePic";
 // import Profile from "./Profile";
 // import OtherProfile from "./OtherProfile";
 // import FindPeople from "./FindPeople";
@@ -15,36 +15,32 @@ export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            // uploaderIsVisible: false,
-            // headerImgClass: "header-image-container",
-            // profileImgClass: "big-image-container",
+            uploaderIsVisible: false,
+            headerImgClass: "header-image-container",
+            profileImgClass: "big-image-container",
         };
         //bind functions
         // this.methodInApp = this.methodInApp.bind(this);
         // this.updateBioInApp = this.updateBioInApp.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // console.log("App just mounted");
-        axios
-            .get("/api/user")
-            .then(({ data }) => {
-                if (data.success) {
-                    this.setState({
-                        first: data.rows.first,
-                        last: data.rows.last,
-                        profile_img: data.rows.profile_img,
-                        bio: data.rows.bio,
-                    });
-                } else {
-                    console.log(
-                        "error with email submission in Password reset"
-                    );
-                }
-            })
-            .catch((err) => {
-                console.log("err in componentDidMount() App axios", err);
-            });
+        try {
+            let { data } = await axios.get("/api/user");
+            if (data.success) {
+                this.setState({
+                    first: data.rows.first,
+                    last: data.rows.last,
+                    imgUrl: data.rows.profile_img,
+                    bio: data.rows.bio,
+                });
+            } else {
+                console.log("error with email submission in Password reset");
+            }
+        } catch (err) {
+            console.log("err in componentDidMount() App axios", err);
+        }
     }
 
     // toggleUploader() {
@@ -88,7 +84,6 @@ export default class App extends React.Component {
             <BrowserRouter>
                 <div id="app-container">
                     <header id="app-header">
-                        Hello {this.state.first} {this.state.last}
                         <Link
                             to="/createList"
                             style={{
@@ -111,23 +106,23 @@ export default class App extends React.Component {
                         >
                             Log Out
                         </button>
-                        {/* <Link
-                            to="/"
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <Logo />
-                        </Link>
-                        <div className="profile-container" id="profile-cont">
-                            <ProfilePic
-                                first={this.state.first}
-                                last={this.state.last}
-                                imgUrl={this.state.profileUrl}
-                                toggleUploader={() => this.toggleUploader()}
-                                imgClass={this.state.headerImgClass}
-                            />
-                        </div> */}
+                        <div id="header-profile-layout">
+                            <p id="header-profile-name">
+                                {this.state.first} {this.state.last}
+                            </p>
+                            <div
+                                className="profile-container"
+                                id="profile-cont"
+                            >
+                                <ProfilePic
+                                    // first={this.state.first}
+                                    // last={this.state.last}
+                                    imgUrl={this.state.profile_img}
+                                    toggleUploader={() => this.toggleUploader()}
+                                    imgClass={this.state.headerImgClass}
+                                />
+                            </div>
+                        </div>
                     </header>
                     <div id="app-body">
                         <Route path="/createList" component={CreateList} />

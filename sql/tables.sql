@@ -35,7 +35,6 @@ CREATE TABLE list_items(
       list_id INT REFERENCES lists(id) ON DELETE CASCADE,
       url VARCHAR(255),
       user_id INT REFERENCES users(id) ON DELETE CASCADE,
-      -- list_name INT REFERENCES lists(list_name) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
@@ -46,16 +45,16 @@ CREATE TABLE list_items(
 
 
 -- // IF ABOVE APPROACH DOES NOT WORK, SEPARATE OUT THE IMAGES FROM THE LISTS TABLE
-    CREATE TABLE (
-      id SERIAL PRIMARY KEY,
-      list_id INT REFERENCES lists(id) ON DELETE CASCADE,
-      user_id INT REFERENCES users(id) ON DELETE CASCADE,
-      url_1 VARCHAR(255),
-      url_2 VARCHAR(255),
-      url_3 VARCHAR(255),
-      url_4 VARCHAR(255),
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
+    -- CREATE TABLE (
+    --   id SERIAL PRIMARY KEY,
+    --   list_id INT REFERENCES lists(id) ON DELETE CASCADE,
+    --   user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    --   url_1 VARCHAR(255),
+    --   url_2 VARCHAR(255),
+    --   url_3 VARCHAR(255),
+    --   url_4 VARCHAR(255),
+    --   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    --   );
 
 
 
