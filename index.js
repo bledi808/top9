@@ -163,35 +163,47 @@ app.post(
     }
 );
 
-// app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-//     console.log("ACCESSED POST /upload route ");
-//     const { userId } = req.session;
-//     const { filename } = req.file;
-//     const url = s3Url + filename;
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("ACCESSED POST /upload route ");
+    const { userId } = req.session;
+    const { filename } = req.file;
+    const url = s3Url + filename;
+    if (req.file) {
+        db.uploadProfilePic(url, userId)
+            .then(({ rows }) => {
+                console.log("POST /upload response", rows[0].profile_img);
+                res.json(rows[0].profile_img);
+            })
+            .catch((err) => {
+                console.log(
+                    "error in POST /upload with uploadProfilePic()",
+                    err
+                );
+                res.json({
+                    success: false,
+                    errorMsg: "Server error: Could not upload profile picture",
+                });
+            });
+    } else {
+        res.json({
+            success: false,
+            errorMsg: "Please select a file",
+        });
+    }
+});
 
-// if (req.file) {
-//     db.uploadProfilePic(url, userId)
-//         .then(({ rows }) => {
-//             console.log("POST /upload response", rows[0].url);
-//             res.json(rows[0].url);
-//         })
-//         .catch((err) => {
-//             console.log(
-//                 "error in POST /upload with uploadProfilePic()",
-//                 err
-//             );
-//             res.json({
-//                 success: false,
-//                 errorMsg: "Server error: Could not upload profile picture",
-//             });
-//         });
-// } else {
-//     res.json({
-//         success: false,
-//         errorMsg: "Please select a file",
-//     });
-// }
-// });
+app.get("/delete/image", (req, res) => {
+    console.log("ACCESSED POST /delete/image route");
+    const { userId } = req.session;
+    db.deleteImage(userId)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("error in /delete/image with deleteImage()", err);
+            res.json({ success: false, error: "Image could not be removed" });
+        });
+});
 
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
 app.get("/welcome", (req, res) => {

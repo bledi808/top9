@@ -114,30 +114,17 @@ module.exports.addItems = (list_id, url, user_id) => {
     );
 };
 
-// // db for images table - required for delete account/image from s3 cloud
-// // module.exports.uploadProfilePic = (imgUrl, userId) => {
-// //     return db.query(
-// //         `
-// //         INSERT INTO images  (url, user_id)
-// //         VALUES($1,$2)
-// //         RETURNING *
-// //         `,
-// //         [imgUrl, userId]
-// //     );
-// // };
-
-// //Update Bio
-// module.exports.updateBio = (bio, userId) => {
-//     return db.query(
-//         `
-//         UPDATE users
-//         SET bio=$1
-//         WHERE id=$2
-//         RETURNING *
-//         `,
-//         [bio, userId]
-//     );
-// };
+// delete profile image
+module.exports.deleteImage = (userId) => {
+    return db.query(
+        `
+        UPDATE users
+        SET profile_img = null
+        WHERE id=$1
+        `,
+        [userId]
+    );
+};
 
 // //Find people - returns last 3 users to sign up
 // module.exports.findPeople = () => {
@@ -260,18 +247,6 @@ module.exports.addItems = (list_id, url, user_id) => {
 //         RETURNING *
 //         `,
 //         [message, senderId]
-//     );
-// };
-
-// delete profile image
-// module.exports.deleteImage = (userId) => {
-//     return db.query(
-//         `
-//         UPDATE users
-//         SET url = null
-//         WHERE id=$1
-//         `,
-//         [userId]
 //     );
 // };
 

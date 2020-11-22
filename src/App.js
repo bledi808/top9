@@ -1,6 +1,6 @@
 import React from "react";
 // import Logo from "./Logo"; // create logo component
-// import Uploader from "./Uploader";
+import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
 // import Profile from "./Profile";
 // import OtherProfile from "./OtherProfile";
@@ -20,7 +20,7 @@ export default class App extends React.Component {
             profileImgClass: "big-image-container",
         };
         //bind functions
-        // this.methodInApp = this.methodInApp.bind(this);
+        this.methodInApp = this.methodInApp.bind(this);
         // this.updateBioInApp = this.updateBioInApp.bind(this);
     }
 
@@ -43,16 +43,16 @@ export default class App extends React.Component {
         }
     }
 
-    // toggleUploader() {
-    //     this.setState({
-    //         uploaderIsVisible: !this.state.uploaderIsVisible,
-    //     });
-    // }
+    toggleUploader() {
+        this.setState({
+            uploaderIsVisible: !this.state.uploaderIsVisible,
+        });
+    }
 
-    // methodInApp(arg) {
-    //     this.toggleUploader();
-    //     this.setState({ profileUrl: arg });
-    // }
+    methodInApp(arg) {
+        this.toggleUploader();
+        this.setState({ imgUrl: arg });
+    }
 
     // updateBioInApp(arg) {
     //     this.setState({ bio: arg });
@@ -117,7 +117,7 @@ export default class App extends React.Component {
                                 <ProfilePic
                                     // first={this.state.first}
                                     // last={this.state.last}
-                                    imgUrl={this.state.profile_img}
+                                    imgUrl={this.state.imgUrl}
                                     toggleUploader={() => this.toggleUploader()}
                                     imgClass={this.state.headerImgClass}
                                 />
@@ -127,6 +127,15 @@ export default class App extends React.Component {
                     <div id="app-body">
                         <Route path="/createList" component={CreateList} />
                         <Route path="/addItems" component={AddItems} />
+                    </div>
+                    <div>
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                methodInApp={this.methodInApp}
+                                imgUrl={this.state.imgUrl}
+                                // toggleUploader={() => this.toggleUploader()}
+                            />
+                        )}
                     </div>
                     {/* <div id="app-body">
                         <NavBar logoutButton={() => this.logOut()} />
@@ -166,15 +175,7 @@ export default class App extends React.Component {
                                 render={() => <FindPeople />}
                             />
                             <Route path="/friends" render={() => <Friends />} />
-                            <div>
-                                {this.state.uploaderIsVisible && (
-                                    <Uploader
-                                        methodInApp={this.methodInApp}
-                                        profileUrl={this.state.profileUrl}
-                                        // toggleUploader={() => this.toggleUploader()}
-                                    />
-                                )}
-                            </div>
+                            
                             <Route path="/chat" component={Chat} />
                         </div>
                     </div> */}
