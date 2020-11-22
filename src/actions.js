@@ -15,6 +15,7 @@ export async function createList(values) {
         console.log("err in createList() action axios", err);
     }
 }
+
 export async function getList() {
     // console.log("getListDetails() dispatched from AddItems");
     // let formData = {}; //work out how to contruct this
@@ -31,12 +32,18 @@ export async function getList() {
 }
 
 export async function addItems(values) {
-    // console.log("addItems() dispatched from AddItems");
+    console.log("addItems() dispatched from AddItems", values);
     let { file1 } = values.files;
     let { listId } = values;
+    let { itemOrder } = values;
+    console.log(listId);
     let formData = new FormData();
     formData.append("file", file1);
     formData.append("listId", listId);
+    formData.append("itemOrder", itemOrder);
+
+    console.log("form data: ", formData);
+
     try {
         let { data } = await axios.post(`/api/addItems`, formData);
         console.log("{data} in addItems() action axios", data);
@@ -49,6 +56,21 @@ export async function addItems(values) {
         console.log("err in addItems() action axios", err);
     }
 }
+
+// export async function displayList() {
+//     // console.log("getListDetails() dispatched from AddItems");
+//     // let formData = {}; //work out how to contruct this
+//     try {
+//         let { data } = await axios.get(`/api/getListDetails`);
+//         // console.log("{data} in getListDetails() action axios", data);
+//         return {
+//             type: "DISPLAY_LIST",
+//             latestList: data.rows,
+//         };
+//     } catch (err) {
+//         console.log("err in getListDetails() action axios", err);
+//     }
+// }
 
 // App ComponentDidMount axios - refactor later (does this need to be wrapped in an async function)
 // try {

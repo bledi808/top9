@@ -103,14 +103,14 @@ module.exports.getList = (userId) => {
 };
 
 //Insert individual items into list_items, items will be tied together by list_id
-module.exports.addItems = (list_id, url, user_id) => {
+module.exports.addItems = (list_id, item_order, url, user_id) => {
     return db.query(
         `
-        INSERT INTO list_items (list_id, url, user_id)
-        VALUES ($1, $2, $3)
+        INSERT INTO list_items (list_id,item_order, url, user_id)
+        VALUES ($1, $2, $3, $4)
         RETURNING *
     `,
-        [list_id, url, user_id]
+        [list_id, item_order, url, user_id]
     );
 };
 

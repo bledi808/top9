@@ -8,7 +8,7 @@ import { useStatefulFiles } from "../hooks/useStatefulFiles";
 export default function AddList() {
     const [values, handleChange] = useStatefulFields();
     const [files, handleChangeFiles] = useStatefulFiles();
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
     const dispatch = useDispatch();
     const latestList = useSelector(
         (state) => state.latestList && state.latestList.filter((user) => user)
@@ -21,18 +21,19 @@ export default function AddList() {
         dispatch(getList());
     }, []);
 
-    const submit = () => {
+    const submit = (itemOrder) => {
         console.log("AddItems about to submit");
         let listId = latestList[0].id;
-        dispatch(addItems({ files, listId }));
-        setTimeout(setCount(count + 1), 10000);
+        // let itemOrder = int;
+        dispatch(addItems({ files, listId, itemOrder }));
+        // setTimeout(setCount(count + 1));
         // dispatch(addItems({ file: values.file, listId: latestList[0].id }));
         // location.replace("/addItems");
         // setGrid(true);
         ///////// how to clear set the input values? e.target.value = "";
     };
 
-    console.log("count in addItems", count);
+    // console.log("count in addItems", count);
 
     const getAddItemDisplay = () => {
         return (
@@ -75,7 +76,7 @@ export default function AddList() {
                                             Select item
                                         </label>
                                         <button
-                                            onClick={submit}
+                                            // onClick={submit}
                                             className="add-item-button"
                                         >
                                             Load item
@@ -95,7 +96,7 @@ export default function AddList() {
                         <div key={item.id} id=""> */}
                     <div id="grid-layout">
                         <div className="list-item">
-                            {listItems && (
+                            {listItems && listItems[0] && (
                                 <img id="grid-image" src={listItems[0].url} />
                             )}
                             <input
@@ -123,14 +124,14 @@ export default function AddList() {
                                 Select item
                             </label>
                             <button
-                                onClick={submit}
+                                onClick={() => submit(1)}
                                 className="add-item-button"
                             >
                                 Load item
                             </button>
                         </div>
                         <div className="list-item">
-                            {count == 2 && (
+                            {listItems && listItems[1] && (
                                 <img id="grid-image" src={listItems[1].url} />
                             )}
                             <input
@@ -158,28 +159,28 @@ export default function AddList() {
                                 Select item
                             </label>
                             <button
-                                onClick={submit}
+                                onClick={() => submit(2)}
                                 className="add-item-button"
                             >
                                 Load item
                             </button>
                         </div>
                         <div className="list-item">
-                            {count == 3 && (
+                            {listItems && listItems[2] && (
                                 <img id="grid-image" src={listItems[2].url} />
                             )}
                             <input
                                 onChange={handleChange}
-                                name="name3"
+                                name="name1"
                                 placeholder="Name (Optional)"
                                 autoComplete="off"
                                 className="input"
                             ></input>
                             <input
                                 onChange={handleChangeFiles}
-                                id="file3"
+                                id="file1"
                                 type="file"
-                                name="file3"
+                                name="file1"
                                 placeholder="image/*"
                                 className="input-file"
                                 data-multiple-caption="{count} files selected"
@@ -188,12 +189,12 @@ export default function AddList() {
                             <label
                                 className="add-item-button"
                                 id="file-label"
-                                htmlFor="file3"
+                                htmlFor="file1"
                             >
                                 Select item
                             </label>
                             <button
-                                onClick={submit}
+                                onClick={() => submit(3)}
                                 className="add-item-button"
                             >
                                 Load item

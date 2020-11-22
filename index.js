@@ -135,9 +135,11 @@ app.post(
         console.log("ACCESSED POST /api/addItems route ");
         const { userId } = req.session;
         const { listId } = req.body;
+        const { itemOrder } = req.body;
         const { filename } = req.file;
         const url = s3Url + filename;
 
+        console.log("req body:", req.body);
         console.log("userId:", userId);
         console.log("listId:", listId);
         console.log("filename:", filename);
@@ -145,7 +147,12 @@ app.post(
 
         if (req.file) {
             try {
-                let { rows } = await db.addItems(listId, url, userId);
+                let { rows } = await db.addItems(
+                    listId,
+                    itemOrder,
+                    url,
+                    userId
+                );
                 console.log("rows", rows);
                 // let list = rows;
                 res.json({

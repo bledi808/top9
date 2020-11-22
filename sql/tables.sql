@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS list_items CASCADE;
 CREATE TABLE list_items(
       id SERIAL PRIMARY KEY,
       list_id INT REFERENCES lists(id) ON DELETE CASCADE,
+      item_order INT NOT NULL, 
       url VARCHAR(255),
       user_id INT REFERENCES users(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
