@@ -639,17 +639,26 @@ body {
 }
 
 /* Search */
-
+#explore-layout {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border: 1px #383838 solid;
+    /* width: 80vw; */
+    /* height: 80vh; */
+    margin: 4%;
+}
 #search-input-div {
-    margin: -1% 0% 1% 2%;
-    padding-left: 345px;
+    /* border: 1px #383838 solid; */
+    margin: 1%;
 }
 
 #search-input {
-    border: 2px teal solid;
-    height: 2.5em;
+    border: 1px #383838 solid;
+    height: 2em;
     font-size: medium;
-    color: teal;
+    color: rgb(223, 73, 73);
 }
 
 #search-layout {
@@ -657,45 +666,66 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 90vw;
+    border: 1px red solid;
 }
 
 #search-container {
-    width: 190px;
-    text-align: right;
-    margin: 0% 1% 0 0px;
+    border: 1px #383838 solid;
+    width: 350px;
+    /* text-align: right; */
+    margin: 1%;
+    padding: 1%;
 }
 #search-image-container {
     width: 190px;
-    height: 190px;
-    overflow: hidden;
+    /* height: 190px; */
+    /* overflow: hidden; */
     display: flex;
     align-items: flex-end;
     flex-wrap: wrap;
     text-align: end;
     /* padding-bottom: 3px; */
+    border: 1px green solid;
 }
 
 #search-container:hover {
     /* filter: grayscale(50%); */
-    /* border: 1px solid teal; */
+    border: 1px solid rgb(223, 73, 73);
 }
 
-.search-image {
+/* .search-image {
     width: 190px;
-    /* max-height: 185px; */
-    /* box-shadow: -2px -2px 5px grey; */
+    max-height: 185px;
+    box-shadow: -2px -2px 5px grey;
     border: 1px solid transparent;
 }
 .search-image:hover {
     border: 1px solid red;
-}
+} */
 
+.explore-headings {
+    background-color: #5c5a5a;
+    color: white;
+    padding: 0 1%;
+    /* width: 80px; */
+}
 #search-name {
     height: 2em;
     color: #383838;
+    color: midnightblue;
     /* border: 1px #383838 solid; */
 }
 
+#explore-timestamp {
+    color: midnightblue;
+}
+
+/*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */
+
+/*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */
+
+/*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */ /*  */
 /* Friends */
 
 #main-friends-container {

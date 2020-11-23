@@ -118,6 +118,20 @@ module.exports.displayList = (listId) => {
     );
 };
 
+//latest lists
+module.exports.getLatestLists = () => {
+    return db.query(
+        `
+        SELECT * FROM lists
+        ORDER BY id
+        DESC LIMIT 6;
+        `
+    );
+};
+
+// search lists by name
+// search lists by username
+
 //Insert individual items into list_items, items will be tied together by list_id
 module.exports.addItems = (list_id, item_order, url, user_id) => {
     return db.query(

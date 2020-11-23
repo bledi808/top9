@@ -9,6 +9,7 @@ import ProfilePic from "./ProfilePic";
 import CreateList from "./CreateList";
 import AddItems from "./AddItems";
 import DisplayList from "./DisplayList";
+import Explore from "./Explore";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -109,6 +110,14 @@ export default class App extends React.Component {
                         >
                             <p>Display List </p>
                         </Link>
+                        <Link
+                            to="/explore"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <p>Explore</p>
+                        </Link>
                         <button
                             onClick={this.logOut}
                             // className="navbar-buttons"
@@ -137,6 +146,7 @@ export default class App extends React.Component {
                         <Route path="/createList" component={CreateList} />
                         <Route path="/addItems" component={AddItems} />
                         <Route path="/displayList" component={DisplayList} />
+                        <Route path="/explore" component={Explore} />
                     </div>
                     <div>
                         {this.state.uploaderIsVisible && (

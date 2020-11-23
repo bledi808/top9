@@ -81,3 +81,18 @@ export async function displayList(listId) {
 //         bio: data.rows.bio,
 //     });
 // }
+export async function latestLists() {
+    // console.log("latestLists() dispatched from Explore");
+
+    try {
+        let { data } = await axios.get(`/api/explore`);
+        // console.log("{data.rows} in latestLists() action axios", data.rows);
+
+        return {
+            type: "LATEST_LISTS",
+            latestLists: data.rows,
+        };
+    } catch (err) {
+        console.log("err in latestLists() action axios", err);
+    }
+}

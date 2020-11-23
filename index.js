@@ -188,6 +188,19 @@ app.get(`/api/displayList/:listId`, async (req, res) => {
     }
 });
 
+app.get(`/api/explore`, async (req, res) => {
+    console.log("ACCESSED GET /api/explore route ");
+    try {
+        let { rows } = await db.getLatestLists();
+        console.log("rows in /api/explore", rows);
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in GET /api/explore", err);
+    }
+});
+
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("ACCESSED POST /upload route ");
     const { userId } = req.session;

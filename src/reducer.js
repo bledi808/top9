@@ -32,6 +32,12 @@ export default function (state = {}, action) {
             // listItems: action.newList.cover,
         });
     }
+    if (action.type == "LATEST_LISTS") {
+        state = Object.assign({}, state, {
+            latestLists: action.latestLists,
+            // listItems: action.newList.cover,
+        });
+    }
 
     // updates state with ACCEPT friend (adds user to Accepted friendList and removes from receivedRequests)
     // if (action.type == "ACCEPT_FRIEND") {
