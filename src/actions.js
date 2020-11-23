@@ -55,6 +55,24 @@ export async function displayList(listId) {
     }
 }
 
+export async function searchListName(listName) {
+    // console.log("searchListName dispatched from Explore");
+    // console.log("searchListName value: ", listName);
+
+    try {
+        let { data } = await axios.get(`/api/explore/${listName}`);
+        console.log("{data.rows} in searchListName() action axios", data);
+        return {
+            type: "SEARCH_LISTNAME",
+            searchListName: data.rows,
+            success: data.success,
+            // displayList: data.rows,
+        };
+    } catch (err) {
+        console.log("err in searchListName() action axios", err);
+    }
+}
+
 //no longer being used in addItems - list details are accessed from global state updated by POST createList
 // export async function getList() {
 //     // console.log("getListDetails() dispatched from AddItems");

@@ -201,6 +201,29 @@ app.get(`/api/explore`, async (req, res) => {
     }
 });
 
+app.get(`/api/explore/:listName`, async (req, res) => {
+    console.log("ACCESSED GET /api/explore/:listName");
+    console.log("req.params in api/search", req.params);
+    const { listName } = req.params;
+    try {
+        let { rows } = await db.searchListName(listName);
+        if (rows.length != 0) {
+            console.log("res from searchListName()", rows);
+            res.json({
+                success: true,
+                rows,
+            });
+        } else {
+            res.json({
+                success: false,
+                error: "No users found",
+            });
+        }
+    } catch (err) {
+        console.log("err in /api/:users with findMatchingPeople()", err);
+    }
+});
+
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("ACCESSED POST /upload route ");
     const { userId } = req.session;

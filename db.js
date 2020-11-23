@@ -130,6 +130,18 @@ module.exports.getLatestLists = () => {
 };
 
 // search lists by name
+module.exports.searchListName = (str) => {
+    return db.query(
+        `
+        SELECT * FROM lists
+        WHERE list_name ILIKE $1
+        ORDER BY list_name
+        ASC LIMIT 6
+        `,
+        [str + "%"]
+    );
+};
+
 // search lists by username
 
 //Insert individual items into list_items, items will be tied together by list_id
@@ -164,19 +176,6 @@ module.exports.deleteImage = (userId) => {
 //         ORDER BY id
 //         DESC LIMIT 10
 //         `
-//     );
-// };
-
-// //Find people matching serach query text
-// module.exports.findMatchingPeople = (str) => {
-//     return db.query(
-//         `
-//         SELECT id, first, last, url FROM users
-//         WHERE first ILIKE $1
-//         ORDER BY first
-//         ASC LIMIT 10
-//         `,
-//         [str + "%"]
 //     );
 // };
 
