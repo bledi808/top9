@@ -8,7 +8,7 @@ import { useStatefulFiles } from "../hooks/useStatefulFiles";
 export default function AddList() {
     const [values, handleChange] = useStatefulFields();
     const [files, handleChangeFiles] = useStatefulFiles();
-    // const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const [error, setError] = useState(false); // set to true if not all tiles are filled  when Posting list
     const dispatch = useDispatch();
     const latestList = useSelector(
@@ -27,7 +27,7 @@ export default function AddList() {
         let listId = latestList[0].id;
         // let itemOrder = int;
         dispatch(addItems({ files, listId, itemOrder }));
-        // setTimeout(setCount(count + 1));
+        setTimeout(setCount(count + 1));
         // dispatch(addItems({ file: values.file, listId: latestList[0].id }));
         // location.replace("/addItems");
         // setGrid(true);
@@ -138,14 +138,16 @@ export default function AddList() {
                                     Load item
                                 </button>
                             </div>
-                            {error && (
+                            {/* {error && (
                                 <div className="list-item" id="list-item-error">
                                     Empty
                                 </div>
-                            )}
+                            )} */}
                         </>
 
                         <div className="list-item">
+                            {/* {listItems && !listItems[1] && <div>2</div>} */}
+                            {count < 2 && <div id="index">2</div>}
                             {listItems && listItems[1] && (
                                 <img id="grid-image" src={listItems[1].url} />
                             )}
@@ -178,6 +180,7 @@ export default function AddList() {
                             )}
                         </div>
                         <div className="list-item">
+                            {count < 3 && <div id="index">3</div>}
                             {listItems && listItems[2] && (
                                 <img id="grid-image" src={listItems[2].url} />
                             )}

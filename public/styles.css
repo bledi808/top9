@@ -191,13 +191,21 @@ body {
 
 #list-item {
     box-sizing: content-box;
-
     border: 1px solid black;
     height: 185px;
     width: 185px;
     margin: 1px;
     padding: 1px;
     /* width: 100%; */
+}
+#index {
+    z-index: ;
+}
+
+.list-item:hover {
+    filter: opacity(80%);
+    /* filter: grayscale(10%); */
+    /* border: rgb(223, 73, 73) 1px solid; */
 }
 
 /* Input fields in AddItems */
