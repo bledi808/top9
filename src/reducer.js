@@ -5,12 +5,13 @@ export default function (state = {}, action) {
         });
     }
 
-    if (action.type == "GET_LIST") {
-        state = Object.assign({}, state, {
-            latestList: action.latestList,
-            // listItems: action.newList.cover,
-        });
-    }
+    //no longer being used in addItems - list details are accessed from global state updated by POST createList
+    // if (action.type == "GET_LIST") {
+    //     state = Object.assign({}, state, {
+    //         latestList: action.latestList,
+    //         // listItems: action.newList.cover,
+    //     });
+    // }
 
     if (action.type == "ADD_ITEMS") {
         if (!state.listItems) {
@@ -23,6 +24,13 @@ export default function (state = {}, action) {
                 listItems: [...state.listItems, action.listItems[0]],
             };
         }
+    }
+
+    if (action.type == "DISPLAY_LIST") {
+        state = Object.assign({}, state, {
+            displayList: action.displayList,
+            // listItems: action.newList.cover,
+        });
     }
 
     // updates state with ACCEPT friend (adds user to Accepted friendList and removes from receivedRequests)

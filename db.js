@@ -89,16 +89,32 @@ module.exports.createList = (list_name, description, cover, userId) => {
     );
 };
 
+//no longer being used in addItems - list details are accessed from global state updated by POST createList
 //SELECT latest list for the user - ie. teh one user just created and will add items to
-module.exports.getList = (userId) => {
+// module.exports.getListDetails = (userId) => {
+//     return db.query(
+//         `
+//         SELECT * FROM lists
+//         WHERE user_id=$1
+//         ORDER BY id
+//         DESC LIMIT 1
+//     `,
+//         [userId]
+//     );
+// };
+
+module.exports.displayList = (listId) => {
     return db.query(
         `
-        SELECT * FROM lists 
-        WHERE user_id=$1 
-        ORDER BY id
-        DESC LIMIT 1
+        SELECT lists.id AS list_id, list_items.id AS item_id, list_name, description, item_order, url
+        FROM list_items
+        INNER JOIN lists
+        ON (lists.id = list_items.list_id)
+        WHERE lists.id = $1
+        ORDER BY item_id
+        DESC LIMIT 9;
     `,
-        [userId]
+        [listId]
     );
 };
 

@@ -81,7 +81,7 @@ export default class Uploader extends React.Component {
                                 htmlFor="file"
                                 className="button"
                             >
-                                Select item
+                                Select image
                             </label>
                             <div id="uploader-buttons-div">
                                 <button

@@ -110,22 +110,21 @@ app.post(`/api/createList`, async (req, res) => {
     }
 });
 
-app.get(`/api/getListDetails`, async (req, res) => {
-    console.log("ACCESSED GET /api/getList route ");
-    // console.log("values from req.body", req.body);
-    const { userId } = req.session;
-    // const { title, description, file } = req.body;
-    try {
-        let { rows } = await db.getList(userId);
-        // console.log("rows in getList", rows);
-        // let list = rows;
-        res.json({
-            rows,
-        });
-    } catch (err) {
-        console.log("err in GET /api/getList", err);
-    }
-});
+//no longer being used in addItems - list details are accessed from global state updated by POST createList
+// app.get(`/api/getListDetails`, async (req, res) => {
+//     console.log("ACCESSED GET /api/getList route ");
+//     // console.log("values from req.body", req.body);
+//     const { userId } = req.session;
+//     // const { title, description, file } = req.body;
+//     try {
+//         let { rows } = await db.getListDetails(userId);
+//         res.json({
+//             rows,
+//         });
+//     } catch (err) {
+//         console.log("err in GET /api/getList", err);
+//     }
+// });
 
 app.post(
     "/api/addItems",
@@ -139,11 +138,11 @@ app.post(
         const { filename } = req.file;
         const url = s3Url + filename;
 
-        console.log("req body:", req.body);
-        console.log("userId:", userId);
-        console.log("listId:", listId);
-        console.log("filename:", filename);
-        console.log("url:", url);
+        // console.log("req body:", req.body);
+        // console.log("userId:", userId);
+        // console.log("listId:", listId);
+        // console.log("filename:", filename);
+        // console.log("url:", url);
 
         if (req.file) {
             try {
@@ -169,6 +168,25 @@ app.post(
         }
     }
 );
+
+app.get(`/api/displayList/:listId`, async (req, res) => {
+    console.log("ACCESSED GET /api/displayList route ");
+    console.log("values from req.params", req.params);
+    // const { userId } = req.session;
+    const { listId } = req.params;
+    // const { listId } = req.body;
+
+    try {
+        let { rows } = await db.displayList(listId);
+        console.log("rows in displayList", rows);
+        // let list = rows;
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in GET /api/displayList", err);
+    }
+});
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("ACCESSED POST /upload route ");

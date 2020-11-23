@@ -175,8 +175,8 @@ body {
     background-color: white;
 }
 
-#add-items {
-    /* color: royalblue; */
+#publish-items {
+    color: #383838;
 }
 
 #clear-items:hover {
