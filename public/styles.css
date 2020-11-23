@@ -129,8 +129,8 @@ body {
 .list-item {
     box-sizing: content-box;
     border: 1px solid black;
-    height: 190px;
-    width: 190px;
+    height: 185px;
+    width: 185px;
     margin: 1px;
     /* padding: 1px; */
     display: flex;
@@ -141,9 +141,20 @@ body {
 
     /* width: 100%; */
 }
+
+#list-item-error {
+    position: absolute;
+    border: red 1px solid;
+    color: red;
+    /* border: tomato 1px solid; */
+    /* background-color: tomato; */
+    /* color: tomato; */
+    /* color: white; */
+}
+
 #grid-image {
-    height: 190px;
-    width: 190px;
+    height: 185px;
+    width: 185px;
     position: absolute;
     z-index: 1;
 }
@@ -153,23 +164,37 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 380px;
-    width: 345px;
+    height: 370px;
+    width: 300px;
     background-color: white;
 }
 
 #publish-box {
-    color: 380px;
-    font-size: 70px;
+    /* color: 380px; */
+    font-size: 20px;
     background-color: white;
+}
+
+#add-items {
+    /* color: royalblue; */
+}
+
+#clear-items:hover {
+    color: tomato;
+    cursor: pointer;
+}
+
+#publish-items:hover {
+    color: green;
+    cursor: pointer;
 }
 
 #list-item {
     box-sizing: content-box;
 
     border: 1px solid black;
-    height: 190px;
-    width: 190px;
+    height: 185px;
+    width: 185px;
     margin: 1px;
     padding: 1px;
     /* width: 100%; */

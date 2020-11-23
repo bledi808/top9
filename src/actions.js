@@ -33,12 +33,12 @@ export async function getList() {
 
 export async function addItems(values) {
     console.log("addItems() dispatched from AddItems", values);
-    let { file1 } = values.files;
+    let { file } = values.files;
     let { listId } = values;
     let { itemOrder } = values;
     // console.log(listId);
     let formData = new FormData();
-    formData.append("file", file1);
+    formData.append("file", file);
     formData.append("listId", listId);
     formData.append("itemOrder", itemOrder);
 
