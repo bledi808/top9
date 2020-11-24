@@ -101,31 +101,31 @@ module.exports.completeList = (listId) => {
     );
 };
 
-module.exports.addToFavourites = (listId) => {
+module.exports.addToFavourites = (listId, userId) => {
     return db.query(
         `
-        UPDATE lists
-        SET favourite=true
-        WHERE id=$1
+        INSERT INTO favourites 
+        (list_id, user_id)
+        VALUES($1,$2)
         RETURNING *
         `,
-        [listId]
+        [listId, userId]
     );
 };
 
-//no longer being used in addItems - list details are accessed from global state updated by POST createList
-//SELECT latest list for the user - ie. teh one user just created and will add items to
-// module.exports.getListDetails = (userId) => {
-//     return db.query(
-//         `
-//         SELECT * FROM lists
-//         WHERE user_id=$1
-//         ORDER BY id
-//         DESC LIMIT 1
-//     `,
-//         [userId]
-//     );
-// };
+module.exports.getFavourites = (userId) => {
+    return db.query(
+        `
+        SELECT favourites.id AS id, lists.id AS list_id, list_name, description, cover, lists.created_at  
+        FROM favourites
+        INNER JOIN lists
+        ON (lists.id = favourites.list_id)
+        WHERE favourites.user_id=$1
+        ORDER BY favourites.id
+        `,
+        [userId]
+    );
+};
 
 module.exports.displayList = (listId) => {
     return db.query(
@@ -226,17 +226,6 @@ module.exports.getNextPreviousListId = (listId) => {
     );
 };
 
-// //Find people - returns last 3 users to sign up
-// module.exports.findPeople = () => {
-//     return db.query(
-//         `
-//         SELECT id, first, last, url FROM users
-//         ORDER BY id
-//         DESC LIMIT 10
-//         `
-//     );
-// };
-
 // //check friendship status
 // module.exports.checkFriendStatus = (userId, otherId) => {
 //     return db.query(
@@ -334,17 +323,6 @@ module.exports.getNextPreviousListId = (listId) => {
 //         RETURNING *
 //         `,
 //         [message, senderId]
-//     );
-// };
-
-//for incpmplete functionality to delete S3 images for userId
-// module.exports.deleteImage = (userId) => {
-//     return db.query(
-//         `
-//         DELETE FROM images
-//         WHERE id=$1
-//         `,
-//         [userId]
 //     );
 // };
 

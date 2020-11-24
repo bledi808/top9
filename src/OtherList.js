@@ -11,7 +11,10 @@ export default function OtherList(props) {
     const [next, setNext] = useState();
     const [previous, setPrevious] = useState();
     const [current, setCurrent] = useState(props.match.params.listId);
+    const [buttonText, setButtonText] = useState("Add to Favourites");
+
     let listId = props.match.params.listId;
+
     console.log("listId:", listId);
     console.log("current :", current);
     console.log("next:", next);
@@ -54,6 +57,16 @@ export default function OtherList(props) {
         }
     };
 
+    //  try {
+    //             let { data } = await axios.post(`/api/friendStatus/button`, {
+    //                 buttonText,
+    //                 otherId,
+    //             });
+    //             setButtonText(data.status);
+    //         } catch (err) {
+    //             console.log("err in submit() axios in FriendButton", err);
+    //         }
+
     return (
         <>
             <div id="add-items-container">
@@ -89,7 +102,7 @@ export default function OtherList(props) {
                         </button>
                     </Link>
                     <button onClick={addToFavourite} id="submit-reg">
-                        Add to Favourites
+                        {buttonText}
                     </button>
                 </div>
             </div>

@@ -404,7 +404,7 @@ export default function AddItems() {
 
                         {listItems && listItems[0] && (
                             <Link
-                                to="/displayList"
+                                to="/reviewList"
                                 style={{
                                     textDecoration: "none",
                                 }}

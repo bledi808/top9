@@ -4,8 +4,9 @@ import ProfilePic from "./ProfilePic";
 import OtherList from "./OtherList";
 import CreateList from "./CreateList";
 import AddItems from "./AddItems";
-import DisplayList from "./DisplayList";
+import ReviewList from "./ReviewList";
 import Explore from "./Explore";
+import Favourites from "./Favourites";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 // import Logo from "./Logo"; // create logo component
@@ -102,12 +103,12 @@ export default class App extends React.Component {
                             <p>Add Items</p>
                         </Link>
                         <Link
-                            to="/displayList"
+                            to="/reviewList"
                             style={{
                                 textDecoration: "none",
                             }}
                         >
-                            <p>Display List </p>
+                            <p>Review List </p>
                         </Link>
                         <Link
                             to="/explore"
@@ -116,6 +117,14 @@ export default class App extends React.Component {
                             }}
                         >
                             <p>Explore</p>
+                        </Link>
+                        <Link
+                            to="/favourites"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <p>Favourites</p>
                         </Link>
                         <button
                             onClick={this.logOut}
@@ -145,10 +154,11 @@ export default class App extends React.Component {
                         <Route path="/createList" component={CreateList} />
                         <Route path="/addItems" component={AddItems} />
                         <Route path="/explore" component={Explore} />
+                        <Route path="/favourites" component={Favourites} />
                         <Route
                             exact
-                            path="/displayList"
-                            component={DisplayList}
+                            path="/reviewList"
+                            component={ReviewList}
                         />
                         <Route
                             path="/displayList/:listId"

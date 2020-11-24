@@ -134,3 +134,18 @@ export async function latestLists() {
         console.log("err in latestLists() action axios", err);
     }
 }
+export async function favouriteLists() {
+    console.log("favouriteLists() dispatched from Favourites");
+
+    try {
+        let { data } = await axios.get(`/api/getFavourites`);
+        console.log("{data.rows} in favouriteLists action axios", data.rows);
+
+        return {
+            type: "GET_FAVOURITES",
+            favouriteLists: data.rows,
+        };
+    } catch (err) {
+        console.log("err in favouriteLists() action axios", err);
+    }
+}

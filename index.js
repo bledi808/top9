@@ -185,16 +185,33 @@ app.post("/api/listComplete/:listId", async (req, res) => {
 });
 app.post("/api/favourite/:listId", async (req, res) => {
     console.log("ACCESSED POST /api/favourite/:listId route ");
-
     const { listId } = req.params;
-    console.log("listId: ", listId);
+    const { userId } = req.session;
+
+    // let { rows } = db.getFavourites(userId);
+
     try {
-        let { rows } = await db.addToFavourites(listId);
+        let { rows } = await db.addToFavourites(listId, userId);
         res.json({
             rows,
         });
     } catch (err) {
         console.log("err in POST /api/favourite/:listId", err);
+    }
+});
+
+app.get(`/api/getFavourites`, async (req, res) => {
+    console.log("ACCESSED GET /api/getFavourites route ");
+    const { userId } = req.session;
+    console.log("userId: ", userId);
+    try {
+        let { rows } = await db.getFavourites(userId);
+        console.log("rows in /api/getFavourites", rows);
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in GET /api/getFavourites", err);
     }
 });
 

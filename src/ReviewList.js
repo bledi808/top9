@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { displayList, listComplete } from "./actions";
 import axios from "./axios";
 
-export default function DisplayList() {
+export default function ReviewList() {
     const dispatch = useDispatch();
     const newList = useSelector((state) => state.newList);
     const displayGrid = useSelector((state) => state.displayList);
