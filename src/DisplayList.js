@@ -22,9 +22,13 @@ export default function DisplayList() {
     const submit = async () => {
         console.log("DisplayList about to submit");
         // await dispatch(listComplete());
-        let { data } = await axios.post(`/api/listComplete/${listId}`);
-        console.log("{data} in completeList() axios", data);
-        location.replace("/");
+        try {
+            let { data } = await axios.post(`/api/listComplete/${listId}`);
+            console.log("{data} in completeList() axios", data);
+            location.replace("/");
+        } catch (err) {
+            console.log("err in POST /api/getListById/:listId", err);
+        }
     };
 
     const clear = () => {

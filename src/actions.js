@@ -41,7 +41,7 @@ export async function addItems(values) {
 
 export async function displayList(listId) {
     // console.log("displayList() dispatched from DisplayItems");
-    // console.log("Latest List Id from DisplayList:", listId);
+    console.log("Latest List Id from DisplayList:", listId);
 
     try {
         let { data } = await axios.get(`/api/displayList/${listId}`);

@@ -1,53 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { displayList, serverMessage } from "./actions";
+import axios from "./axios";
 
 export default function OtherList(props) {
     const dispatch = useDispatch();
-    // const newList = useSelector((state) => state.newList);
     const listDoesNotExist = useSelector((state) => state.serverMessage);
     const displayGrid = useSelector((state) => state.displayList);
-
-    // console.log("props in OtherList", props);
-    // console.log("props in OtherList", props.match.params.listId);
-
-    // console.log("otherList in DisplayList:", otherList);
-    // console.log("displayGrid in OtherList:", displayGrid);
-    console.log("listDoesNotExist in OtherList: ", listDoesNotExist);
+    const [next, setNext] = useState();
+    const [previous, setPrevious] = useState();
+    const [current, setCurrent] = useState(props.match.params.listId);
     let listId = props.match.params.listId;
+    console.log("listId:", listId);
+    console.log("current :", current);
+    console.log("next:", next);
+    console.log("previous:", previous);
 
-    const Next = (listId) => {
-        const result = listId + 1;
-        return result;
-    };
-    const Previous = (listId) => {
-        const result = listId - 1;
-        return result;
-    };
-
-    const now = Next(92);
-    console.log("results from maths: ", now);
+    // console.log("listDoesNotExist in OtherList: ", listDoesNotExist);
 
     useEffect(() => {
+        console.log("USE EFFECT RUNNING");
         let listId = props.match.params.listId;
-        dispatch(displayList(listId));
+        dispatch(displayList(current));
+        setNextPrevious();
         if (listDoesNotExist) {
-            console.log("list does not exist in OtherList, REROUTING");
             location.replace("/");
         }
-    }, [listDoesNotExist]);
+    }, [listDoesNotExist, current]);
 
-    const submit = () => {
-        //dispatch an action to get the if of the next/previous listId;
-        //store the values in global state in variables: Next and Previous
-        //dispatch the above action in useEffect with Next/Prev arguments - i.e:
-        // displayList(Next)
-        // displayList(Previous)
+    const setNextPrevious = async () => {
+        try {
+            let { data } = await axios.get(`/api/getListById/${listId}`);
+            setNext(data.rows[0].nextId);
+            setPrevious(data.rows[0].previousId);
+        } catch (err) {
+            console.log("err in GET /api/getListById/:listId", err);
+        }
     };
 
-    const next = () => {};
-    const previous = () => {};
+    const nextList = async () => {
+        setCurrent(next);
+    };
+    const previousList = () => {
+        setCurrent(previous);
+    };
 
     return (
         <>
@@ -64,14 +61,25 @@ export default function OtherList(props) {
                             ))}
                 </div>
                 <div id="reg-actions">
-                    <button id="submit-reg">Back to Explore</button>
+                    <Link
+                        to="/explore"
+                        style={{
+                            textDecoration: "none",
+                        }}
+                    >
+                        <button id="submit-reg">Back to Explore</button>
+                    </Link>
 
-                    <button onClick={next} id="submit-reg">
-                        Next
-                    </button>
-                    <button onClick={previous} id="submit-reg">
-                        Previous
-                    </button>
+                    <Link to={"/displayList/" + next}>
+                        <button onClick={nextList} id="submit-reg">
+                            Next
+                        </button>
+                    </Link>
+                    <Link to={"/displayList/" + previous}>
+                        <button onClick={previousList} id="submit-reg">
+                            Previous
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>

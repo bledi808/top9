@@ -184,14 +184,12 @@ app.post("/api/listComplete/:listId", async (req, res) => {
 
 app.get(`/api/displayList/:listId`, async (req, res) => {
     console.log("ACCESSED GET /api/displayList route ");
-    console.log("values from req.params", req.params);
-    // const { userId } = req.session;
+    // console.log("values from req.params", req.params);
     const { listId } = req.params;
-    // const { listId } = req.body;
 
     try {
         let { rows } = await db.displayList(listId);
-        console.log("rows in displayList", rows);
+        // console.log("rows in displayList", rows);
         // let list = rows;
         if (rows.length == 0) {
             res.json({
@@ -205,6 +203,22 @@ app.get(`/api/displayList/:listId`, async (req, res) => {
         }
     } catch (err) {
         console.log("err in GET /api/displayList", err);
+    }
+});
+
+app.get(`/api/getListById/:listId`, async (req, res) => {
+    console.log("ACCESSED GET /api/getListById/:listId route ");
+    const { listId } = req.params;
+    console.log("listId from req.params", listId);
+
+    try {
+        let { rows } = await db.getNextPreviousListId(listId);
+        console.log("rows in getListById: ", rows);
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in POST /api/getListById/:listId", err);
     }
 });
 

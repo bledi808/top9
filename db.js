@@ -122,7 +122,7 @@ module.exports.displayList = (listId) => {
         FROM list_items
         INNER JOIN lists
         ON (lists.id = list_items.list_id)
-        WHERE lists.id = $1
+        WHERE lists.id = $1  
         ORDER BY item_id
         DESC LIMIT 9;
     `,
@@ -135,6 +135,7 @@ module.exports.getLatestLists = () => {
     return db.query(
         `
         SELECT * FROM lists
+        WHERE complete=true
         ORDER BY id
         DESC LIMIT 6;
         `
@@ -146,7 +147,7 @@ module.exports.searchListName = (str) => {
     return db.query(
         `
         SELECT * FROM lists
-        WHERE list_name ILIKE $1
+        WHERE (complete=true AND list_name ILIKE $1) 
         ORDER BY list_name
         ASC LIMIT 6
         `,
@@ -177,6 +178,26 @@ module.exports.deleteImage = (userId) => {
         WHERE id=$1
         `,
         [userId]
+    );
+};
+
+module.exports.getNextPreviousListId = (listId) => {
+    return db.query(
+        `
+        SELECT id ,
+        (SELECT id FROM lists
+            WHERE (complete=true AND id > $1)
+            ORDER BY id ASC
+            LIMIT 1) 
+                AS "nextId",
+        (SELECT id FROM lists
+            WHERE (complete=true AND id < $1)
+            ORDER BY id DESC
+            LIMIT 1) 
+                AS "previousId"
+        FROM lists
+        WHERE id=$1`,
+        [listId]
     );
 };
 
