@@ -45,6 +45,14 @@ export default function OtherList(props) {
     const previousList = () => {
         setCurrent(previous);
     };
+    const addToFavourite = async () => {
+        try {
+            let { data } = await axios.post(`/api/favourite/${listId}`);
+            console.log("data in favourite axios in OtherProfile", data);
+        } catch (err) {
+            console.log("err in GET /api/getListById/:listId", err);
+        }
+    };
 
     return (
         <>
@@ -80,6 +88,9 @@ export default function OtherList(props) {
                             Previous
                         </button>
                     </Link>
+                    <button onClick={addToFavourite} id="submit-reg">
+                        Add to Favourites
+                    </button>
                 </div>
             </div>
         </>

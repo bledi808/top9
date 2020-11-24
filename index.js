@@ -170,8 +170,10 @@ app.post(
 );
 
 app.post("/api/listComplete/:listId", async (req, res) => {
+    console.log("ACCESSED POST /api/listComplete route ");
+
     const { listId } = req.params;
-    console.log("listId: ", listId);
+    // console.log("listId: ", listId);
     try {
         let { rows } = await db.completeList(listId);
         res.json({
@@ -179,6 +181,20 @@ app.post("/api/listComplete/:listId", async (req, res) => {
         });
     } catch (err) {
         console.log("err in POST /api/listComplete/:listId", err);
+    }
+});
+app.post("/api/favourite/:listId", async (req, res) => {
+    console.log("ACCESSED POST /api/favourite/:listId route ");
+
+    const { listId } = req.params;
+    console.log("listId: ", listId);
+    try {
+        let { rows } = await db.addToFavourites(listId);
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in POST /api/favourite/:listId", err);
     }
 });
 
@@ -213,7 +229,7 @@ app.get(`/api/getListById/:listId`, async (req, res) => {
 
     try {
         let { rows } = await db.getNextPreviousListId(listId);
-        console.log("rows in getListById: ", rows);
+        // console.log("rows in getListById: ", rows);
         res.json({
             rows,
         });
@@ -226,7 +242,7 @@ app.get(`/api/explore`, async (req, res) => {
     console.log("ACCESSED GET /api/explore route ");
     try {
         let { rows } = await db.getLatestLists();
-        console.log("rows in /api/explore", rows);
+        // console.log("rows in /api/explore", rows);
         res.json({
             rows,
         });

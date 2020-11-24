@@ -101,6 +101,18 @@ module.exports.completeList = (listId) => {
     );
 };
 
+module.exports.addToFavourites = (listId) => {
+    return db.query(
+        `
+        UPDATE lists
+        SET favourite=true
+        WHERE id=$1
+        RETURNING *
+        `,
+        [listId]
+    );
+};
+
 //no longer being used in addItems - list details are accessed from global state updated by POST createList
 //SELECT latest list for the user - ie. teh one user just created and will add items to
 // module.exports.getListDetails = (userId) => {
@@ -154,6 +166,19 @@ module.exports.searchListName = (str) => {
         [str + "%"]
     );
 };
+
+// //get image 1 from list_items for list_id
+// module.exports.getCover = (str) => {
+//     return db.query(
+//         `
+//         SELECT * FROM lists
+//         WHERE (complete=true AND list_name ILIKE $1)
+//         ORDER BY list_name
+//         ASC LIMIT 6
+//         `,
+//         [str + "%"]
+//     );
+// };
 
 // search lists by username
 
