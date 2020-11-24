@@ -1,17 +1,17 @@
 import React from "react";
-// import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
-// import Profile from "./Profile";
-// import OtherProfile from "./OtherProfile";
-// import FindPeople from "./FindPeople";
-// import NavBar from "./NavBar";
+import OtherList from "./OtherList";
 import CreateList from "./CreateList";
 import AddItems from "./AddItems";
 import DisplayList from "./DisplayList";
 import Explore from "./Explore";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+// import Logo from "./Logo"; // create logo component
+// import Profile from "./Profile";
+// import FindPeople from "./FindPeople";
+// import NavBar from "./NavBar";
 
 export default class App extends React.Component {
     constructor() {
@@ -27,7 +27,6 @@ export default class App extends React.Component {
     }
 
     async componentDidMount() {
-        // console.log("App just mounted");
         try {
             let { data } = await axios.get("/api/user");
             if (data.success) {
@@ -62,8 +61,8 @@ export default class App extends React.Component {
     //         // console.log("state in App after UpdateBioInApp", this.state);
     //     };
     // }
+
     logOut() {
-        // console.log("logout clicked");
         axios.get("/api/logout").then(() => {
             location.replace("/welcome#/login");
         });
@@ -145,8 +144,22 @@ export default class App extends React.Component {
                     <div id="app-body">
                         <Route path="/createList" component={CreateList} />
                         <Route path="/addItems" component={AddItems} />
-                        <Route path="/displayList" component={DisplayList} />
                         <Route path="/explore" component={Explore} />
+                        <Route
+                            exact
+                            path="/displayList"
+                            component={DisplayList}
+                        />
+                        <Route
+                            path="/displayList/:listId"
+                            render={(props) => (
+                                <OtherList
+                                    key={props.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
                     </div>
                     <div>
                         {this.state.uploaderIsVisible && (

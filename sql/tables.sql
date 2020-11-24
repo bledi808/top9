@@ -20,6 +20,7 @@ CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       list_name VARCHAR(255) NOT NULL,
       description VARCHAR(255),
+      complete BOOLEAN DEFAULT false,
       cover VARCHAR(255),
       user_id INT REFERENCES users(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

@@ -7,8 +7,8 @@ body {
     font-family: "roboto", sans-serif;
     color: #383838;
     /* background-color: #fa7f72; */
-    background-color: teal;
-    background-color: gainsboro;
+    /* background-color: teal; */
+    /* background-color: gainsboro; */
 }
 
 /* HEADER TOP 9 */
@@ -64,19 +64,25 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #eef2f3;
+    background-color: whitesmoke;
+    background-color: white;
     background-color: linen;
+    /* background-color: lightgrey; */
+
     /* border: 15px green solid; */
     overflow: hidden;
-    /* background-color: white; */
 }
 #app-navbar {
     background-color: #eef2f3;
-    background-color: whitesmoke;
     background-color: #494949;
+    background-color: whitesmoke;
 }
 #app-header {
     /* border-bottom: 1px navy solid; */
+    background-color: #494949;
     background-color: whitesmoke;
+
     display: flex;
     padding-bottom: 3px;
     justify-content: space-between;
@@ -613,7 +619,7 @@ body {
 }
 
 .error-msg {
-    color: white;
+    color: salmon;
     font-size: large;
     /* border: 1px solid whitesmoke; */
     margin-top: 1%;

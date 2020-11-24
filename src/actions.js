@@ -45,11 +45,18 @@ export async function displayList(listId) {
 
     try {
         let { data } = await axios.get(`/api/displayList/${listId}`);
-        // console.log("{data.rows} in displayList() action axios", data.rows);
-        return {
-            type: "DISPLAY_LIST",
-            displayList: data.rows,
-        };
+        console.log("{data} in displayList() action axios", data);
+        if (data.success) {
+            return {
+                type: "DISPLAY_LIST",
+                displayList: data.rows,
+            };
+        } else {
+            return {
+                type: "SERVER_MESSAGE",
+                message: true,
+            };
+        }
     } catch (err) {
         console.log("err in getListDetails() action axios", err);
     }
@@ -58,7 +65,6 @@ export async function displayList(listId) {
 export async function searchListName(listName) {
     // console.log("searchListName dispatched from Explore");
     // console.log("searchListName value: ", listName);
-
     try {
         let { data } = await axios.get(`/api/explore/${listName}`);
         console.log("{data.rows} in searchListName() action axios", data);
@@ -72,6 +78,20 @@ export async function searchListName(listName) {
         console.log("err in searchListName() action axios", err);
     }
 }
+
+// REDUX not useful for this - doing this in component axios instead
+// export async function listComplete() {
+//     console.log("listComplete dispatched from Display List");
+//     try {
+//         let { data } = await axios.get(`/api/listComplete`);
+//         console.log("{data.rows} in searchListName() action axios", data);
+//         return {
+//             type: "LIST_COMPLETE",
+//         };
+//     } catch (err) {
+//         console.log("err in searchListName() action axios", err);
+//     }
+// }
 
 //no longer being used in addItems - list details are accessed from global state updated by POST createList
 // export async function getList() {

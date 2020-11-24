@@ -15,8 +15,6 @@ export default function Explore() {
         dispatch(latestLists());
     }, []);
 
-    const submit = () => {};
-
     return (
         <>
             <div id="explore-layout">

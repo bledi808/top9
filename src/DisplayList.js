@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { displayList } from "./actions";
+import { displayList, listComplete } from "./actions";
+import axios from "./axios";
 
 export default function DisplayList() {
     const dispatch = useDispatch();
@@ -10,14 +11,26 @@ export default function DisplayList() {
     // console.log("newList in DisplayList:", newList);
     // console.log("displayGrid in DisplayList:", displayGrid);
 
+    const listId = newList[0].id;
+    console.log("listId: ", listId);
+
     useEffect(() => {
-        let listId = newList[0].id;
+        // let listId = newList[0].id;
         dispatch(displayList(listId));
     }, []);
 
-    const submit = () => {
+    const submit = async () => {
         console.log("DisplayList about to submit");
+        // await dispatch(listComplete());
+        let { data } = await axios.post(`/api/listComplete/${listId}`);
+        console.log("{data} in completeList() axios", data);
+        location.replace("/");
+    };
+
+    const clear = () => {
+        console.log("CLEAR button clicked");
         location.replace("/createList");
+        // if there's time, refresh addList but get List info displayed on the page...
     };
 
     return (
@@ -36,8 +49,11 @@ export default function DisplayList() {
                 </div>
                 <div id="reg-actions">
                     <button onClick={submit} id="submit-reg" className="button">
-                        Continue
+                        Publish
                     </button>
+                    <div id="clear-items" onClick={clear}>
+                        Start Again
+                    </div>
                 </div>
             </div>
         </>

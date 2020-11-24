@@ -169,6 +169,19 @@ app.post(
     }
 );
 
+app.post("/api/listComplete/:listId", async (req, res) => {
+    const { listId } = req.params;
+    console.log("listId: ", listId);
+    try {
+        let { rows } = await db.completeList(listId);
+        res.json({
+            rows,
+        });
+    } catch (err) {
+        console.log("err in POST /api/listComplete/:listId", err);
+    }
+});
+
 app.get(`/api/displayList/:listId`, async (req, res) => {
     console.log("ACCESSED GET /api/displayList route ");
     console.log("values from req.params", req.params);
@@ -180,9 +193,16 @@ app.get(`/api/displayList/:listId`, async (req, res) => {
         let { rows } = await db.displayList(listId);
         console.log("rows in displayList", rows);
         // let list = rows;
-        res.json({
-            rows,
-        });
+        if (rows.length == 0) {
+            res.json({
+                success: false,
+            });
+        } else {
+            res.json({
+                success: true,
+                rows,
+            });
+        }
     } catch (err) {
         console.log("err in GET /api/displayList", err);
     }

@@ -89,6 +89,18 @@ module.exports.createList = (list_name, description, cover, userId) => {
     );
 };
 
+module.exports.completeList = (listId) => {
+    return db.query(
+        `
+        UPDATE lists
+        SET complete=true
+        WHERE id=$1
+        RETURNING *
+        `,
+        [listId]
+    );
+};
+
 //no longer being used in addItems - list details are accessed from global state updated by POST createList
 //SELECT latest list for the user - ie. teh one user just created and will add items to
 // module.exports.getListDetails = (userId) => {

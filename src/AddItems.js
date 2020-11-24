@@ -28,8 +28,8 @@ export default function AddItems() {
         ///////// how to clear set the input values? e.target.value = "";
     };
 
-    const publish = () => {
-        // console.log("PUBLISH button clicked");
+    const review = () => {
+        // console.log("REVIEW button clicked");
     };
 
     const clear = () => {
@@ -395,22 +395,22 @@ export default function AddItems() {
                 {/* ))} */}
                 <div id="publish-grid">
                     <div className="list-item" id="publish-box">
-                        {!listItems && <div id="add-items"> Add </div>}
+                        {!listItems && <div id="add-items"> Add items </div>}
                         {listItems && listItems[0] && !listItems[2] && (
                             <div id="clear-items" onClick={clear}>
                                 Start Again
                             </div>
                         )}
 
-                        {listItems && listItems[2] && (
+                        {listItems && listItems[0] && (
                             <Link
                                 to="/displayList"
                                 style={{
                                     textDecoration: "none",
                                 }}
                             >
-                                <div id="publish-items" onClick={publish}>
-                                    Publish
+                                <div id="publish-items" onClick={review}>
+                                    Review
                                 </div>
                             </Link>
                         )}
