@@ -21,50 +21,57 @@ export default function CreateList() {
 
     return (
         <>
-            <div className="main-container" id="main-container-register">
-                <div id="register">
-                    <p>Create a new list</p>
+            <div className="create-container">
+                <div>
+                    <p id="create-header">Create a new list</p>
+                    <p id="create-subheader">
+                        We need a title for your top-9. You are free to also add
+                        a description.
+                    </p>
                 </div>
                 <div className="form-layout">
-                    <div className="input-fields">
+                    <div className="create-input-fields">
                         <input
                             name="title"
                             placeholder="Title of your list"
                             onChange={handleChange}
-                            className="reg-input"
+                            className="create-input"
                             autoComplete="off"
                         ></input>
                         <input
                             name="description"
                             placeholder="Description"
                             onChange={handleChange}
-                            className="reg-input"
+                            className="create-input"
                             autoComplete="off"
                         ></input>
-                        <Link to="/">
-                            <div id="reg-actions">
-                                <button
-                                    onClick={submit}
-                                    id="submit-reg"
-                                    className="button"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </Link>
-                        {values && values.title && (
-                            <Link to="/addItems">
-                                <div id="reg-actions">
+
+                        <div id="create-actions">
+                            <Link to="/">
+                                <div id="">
                                     <button
                                         onClick={submit}
-                                        id="submit-reg"
-                                        className="button"
+                                        id="cancel-create"
+                                        className="create-reg"
                                     >
-                                        Continue
+                                        Cancel
                                     </button>
                                 </div>
                             </Link>
-                        )}
+                            {values && values.title && (
+                                <Link to="/addItems">
+                                    <div id="">
+                                        <button
+                                            onClick={submit}
+                                            id="continue-create"
+                                            className="create-reg"
+                                        >
+                                            Continue
+                                        </button>
+                                    </div>
+                                </Link>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

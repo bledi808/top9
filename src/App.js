@@ -98,11 +98,12 @@ export default class App extends React.Component {
                             href="/createList"
                             style={{
                                 textDecoration: "none",
+                                color: "#408ea3",
                             }}
                         >
-                            <p>Create List</p>
+                            <p>CREATE</p>
                         </a>
-                        <Link
+                        {/* <Link
                             to="/addItems"
                             style={{
                                 textDecoration: "none",
@@ -117,22 +118,24 @@ export default class App extends React.Component {
                             }}
                         >
                             <p>Review List </p>
-                        </Link>
+                        </Link> */}
                         <Link
                             to="/explore"
                             style={{
                                 textDecoration: "none",
+                                color: "#408ea3",
                             }}
                         >
-                            <p>Explore</p>
+                            <p>EXPLORE</p>
                         </Link>
                         <Link
                             to="/favourites"
                             style={{
                                 textDecoration: "none",
+                                color: "#408ea3",
                             }}
                         >
-                            <p>Favourites</p>
+                            <p>FAVOURITES</p>
                         </Link>
                         <button
                             onClick={this.logOut}

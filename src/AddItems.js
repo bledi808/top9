@@ -68,22 +68,10 @@ export default function AddItems() {
     return (
         <>
             <div id="add-items-container">
-                <div className="list-item" id="file-box">
-                    {newList &&
-                        newList.map((list) => (
-                            <div key={list.id} id="">
-                                <div id="list-details">
-                                    <p>List Title: {list.list_name}</p>
-                                    <p>Desc: {list.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    <div id="item-files">
-                        <p>Add items to your list</p>
-                    </div>
-                    <div className="list-item">
+                <div className="" id="file-box">
+                    <div className="" id="cover-img-container">
                         {listCover && listCover[0] && (
-                            <img id="grid-image" src={listCover[0].cover} />
+                            <img id="cover-img" src={listCover[0].cover} />
                         )}
                         <input
                             onChange={handleChangeFiles}
@@ -92,8 +80,6 @@ export default function AddItems() {
                             name="file"
                             placeholder="image/*"
                             className="input-file"
-                            data-multiple-caption="{count} files selected"
-                            multiple
                         />
                         <label
                             className="add-item-button"
@@ -109,11 +95,27 @@ export default function AddItems() {
                             Upload cover
                         </button>
                     </div>
-                    {/* <div id="friends-image-container">
-                                    <img className="friends-image" />
-                                </div> */}
-                    {/* </div> */}
-                    {/* ))} */}
+                    {newList &&
+                        newList.map((list) => (
+                            <div key={list.id} id="list-info">
+                                {/* <div id="list-info"> */}
+                                <div id="list-details">
+                                    {/* <p id="list-title">
+                                Classic football tops after mid-century
+                            </p>
+                            <p id="list-description">
+                                This is a list of classic football, soccer,
+                                whatever you wanna call it, tops. This is a list
+                                of classic football, soccer, whatever you wanna
+                                call it, tops.
+                            </p> */}
+                                    <p id="list-title">{list.list_name}</p>
+                                    <p id="list-description">
+                                        {list.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
                 </div>
                 <div id="grid-layout">
                     <>
@@ -420,10 +422,10 @@ export default function AddItems() {
                 {/* </div> */}
                 {/* ))} */}
                 <div id="publish-grid">
-                    <div className="list-item" id="publish-box">
+                    <div className="status-box" id="publish-box">
                         {!listItems && <div id="add-items"> Add items </div>}
                         {error && (
-                            <div className="list-item" id="list-item-error">
+                            <div className="status-box" id="list-item-error">
                                 {error}
                             </div>
                         )}
