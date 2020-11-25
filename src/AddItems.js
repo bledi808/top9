@@ -9,12 +9,15 @@ export default function AddItems() {
     const [values, handleChange] = useStatefulFields();
     const [files, handleChangeFiles] = useStatefulFiles();
     const [count, setCount] = useState(1);
+    const [error, setError] = useState("");
     const dispatch = useDispatch();
     const newList = useSelector((state) => state.newList);
     const listItems = useSelector((state) => state.listItems);
 
-    console.log("newList in AddItems:", newList);
-    console.log("listItems in AddItems:", listItems);
+    // console.log("newList in AddItems:", newList);
+    // console.log("listItems in AddItems:", listItems);
+    // console.log("files.file: ", files.file);
+    console.log("error in AddItems:", error);
 
     useEffect(() => {
         // dispatch(getList()); // not using this anymore, add again if user is allowed to refresh on /addItems
@@ -23,8 +26,15 @@ export default function AddItems() {
     const submit = (itemOrder) => {
         console.log("AddItems about to submit");
         let listId = newList[0].id;
-        dispatch(addItems({ files, listId, itemOrder }));
-        setTimeout(setCount(count + 1)); // how can this be delayed....
+        if (!files.file) {
+            console.log("no files loaded");
+            setError("No item selected");
+        } else {
+            dispatch(addItems({ files, listId, itemOrder }));
+            setTimeout(setCount(count + 1));
+            files.file = "";
+            setError("");
+        } // how can this be delayed....
         ///////// how to clear set the input values? e.target.value = "";
     };
 
@@ -120,11 +130,6 @@ export default function AddItems() {
                                 Load item
                             </button>
                         </div>
-                        {/* {error && (
-                                <div className="list-item" id="list-item-error">
-                                    Empty
-                                </div>
-                            )} */}
                     </>
                     <div className="list-item">
                         {count < 2 && <div id="index">2</div>}
@@ -396,12 +401,16 @@ export default function AddItems() {
                 <div id="publish-grid">
                     <div className="list-item" id="publish-box">
                         {!listItems && <div id="add-items"> Add items </div>}
-                        {listItems && listItems[0] && !listItems[2] && (
-                            <div id="clear-items" onClick={clear}>
-                                Start Again
+                        {error && (
+                            <div className="list-item" id="list-item-error">
+                                {error}
                             </div>
                         )}
-
+                        {listItems && listItems[0] && !listItems[2] && (
+                            <div id="clear-items" onClick={clear}>
+                                Start again
+                            </div>
+                        )}
                         {listItems && listItems[0] && (
                             <Link
                                 to="/reviewList"
@@ -410,7 +419,7 @@ export default function AddItems() {
                                 }}
                             >
                                 <div id="publish-items" onClick={review}>
-                                    Review
+                                    Review list
                                 </div>
                             </Link>
                         )}

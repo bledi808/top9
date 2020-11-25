@@ -16,6 +16,7 @@ export default function CreateList() {
     );
 
     console.log("newList in CreateList", newList);
+    console.log("values in CreateList", values);
 
     const submit = () => {
         console.log("CreateList about to submit");
@@ -52,17 +53,30 @@ export default function CreateList() {
                             placeholder="image/*"
                             // className="input-file"
                         />
-                        <Link to="/addItems">
+                        <Link to="/">
                             <div id="reg-actions">
                                 <button
                                     onClick={submit}
                                     id="submit-reg"
                                     className="button"
                                 >
-                                    Continue
+                                    Cancel
                                 </button>
                             </div>
                         </Link>
+                        {values && values.title && (
+                            <Link to="/addItems">
+                                <div id="reg-actions">
+                                    <button
+                                        onClick={submit}
+                                        id="submit-reg"
+                                        className="button"
+                                    >
+                                        Continue
+                                    </button>
+                                </div>
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>
