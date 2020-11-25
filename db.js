@@ -89,6 +89,31 @@ module.exports.createList = (list_name, description, cover, userId) => {
     );
 };
 
+//upload cover for the list in AddItems
+module.exports.uploadCover = (url, listId) => {
+    return db.query(
+        `
+        UPDATE lists
+        SET cover=$1
+        WHERE id=$2
+        RETURNING *
+        `,
+        [url, listId]
+    );
+};
+
+//Insert individual items into list_items, items will be tied together by list_id
+module.exports.addItems = (list_id, item_order, url, user_id) => {
+    return db.query(
+        `
+        INSERT INTO list_items (list_id,item_order, url, user_id)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+    `,
+        [list_id, item_order, url, user_id]
+    );
+};
+
 module.exports.completeList = (listId) => {
     return db.query(
         `
@@ -201,20 +226,6 @@ module.exports.searchListName = (str) => {
 //         [str + "%"]
 //     );
 // };
-
-// search lists by username
-
-//Insert individual items into list_items, items will be tied together by list_id
-module.exports.addItems = (list_id, item_order, url, user_id) => {
-    return db.query(
-        `
-        INSERT INTO list_items (list_id,item_order, url, user_id)
-        VALUES ($1, $2, $3, $4)
-        RETURNING *
-    `,
-        [list_id, item_order, url, user_id]
-    );
-};
 
 // delete profile image
 module.exports.deleteImage = (userId) => {

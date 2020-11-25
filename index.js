@@ -127,6 +127,43 @@ app.post(`/api/createList`, async (req, res) => {
 // });
 
 app.post(
+    "/api/uploadCover",
+    uploader.single("file"),
+    s3.upload,
+    async (req, res) => {
+        console.log("ACCESSED POST /api/uploadCover route ");
+        const { userId } = req.session;
+        const { listId } = req.body;
+        const { filename } = req.file;
+        const url = s3Url + filename;
+
+        console.log("req body:", req.body);
+        console.log("userId:", userId);
+        console.log("listId:", listId);
+        console.log("filename:", filename);
+        console.log("url:", url);
+        console.log("req.file:", req.file);
+
+        if (req.file) {
+            try {
+                let { rows } = await db.uploadCover(url, listId);
+                console.log("rows in uploadCover", rows);
+                res.json({
+                    rows,
+                });
+            } catch (err) {
+                console.log("err in db.uploadCover() in api/uploadCover", err);
+            }
+        } else {
+            res.json({
+                success: false,
+                errorMsg: "Please select a file",
+            });
+        }
+    }
+);
+
+app.post(
     "/api/addItems",
     uploader.single("file"),
     s3.upload,

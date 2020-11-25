@@ -15,24 +15,39 @@ export async function createList(values) {
     }
 }
 
+export async function uploadCover(listId, { file }) {
+    // console.log("uploadCover() dispatched from AddItems with listId", listId);
+    // console.log("uploadCover() dispatched from AddItems with files", file);
+    let formData = new FormData();
+    formData.append("file", file);
+    formData.append("listId", listId);
+    // console.log("form data in UploadCover: ", formData);
+    try {
+        let { data } = await axios.post(`/api/uploadCover`, formData);
+        console.log("{data.rows} in uploadCover() action axios", data.rows);
+        return {
+            type: "UPLOAD_COVER",
+            listCover: data.rows,
+        };
+    } catch (err) {
+        console.log("err in addItems() action axios", err);
+    }
+}
 export async function addItems(values) {
     // console.log("addItems() dispatched from AddItems", values);
     let { file } = values.files;
     let { listId } = values;
     let { itemOrder } = values;
-    // console.log(listId);
     let formData = new FormData();
     formData.append("file", file);
     formData.append("listId", listId);
     formData.append("itemOrder", itemOrder);
-    // console.log("form data: ", formData);
     try {
         let { data } = await axios.post(`/api/addItems`, formData);
         // console.log("{data} in addItems() action axios", data.rows);
         return {
             type: "ADD_ITEMS",
             listItems: data.rows,
-            // itemOrder: data.rows.item_order,
         };
     } catch (err) {
         console.log("err in addItems() action axios", err);

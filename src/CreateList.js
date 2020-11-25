@@ -1,7 +1,3 @@
-// import React from "react";
-// import axios from "./axios";
-// import { Link } from "react-router-dom";
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +33,6 @@ export default function CreateList() {
                             onChange={handleChange}
                             className="reg-input"
                             autoComplete="off"
-                            required
                         ></input>
                         <input
                             name="description"
@@ -46,14 +41,6 @@ export default function CreateList() {
                             className="reg-input"
                             autoComplete="off"
                         ></input>
-                        <input
-                            onChange={handleChange}
-                            id="file"
-                            type="file"
-                            name="file"
-                            placeholder="image/*"
-                            // className="input-file"
-                        />
                         <Link to="/">
                             <div id="reg-actions">
                                 <button

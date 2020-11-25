@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addItems } from "./actions";
+import { addItems, uploadCover } from "./actions";
 import { useStatefulFields } from "../hooks/useStatefulFields";
 import { useStatefulFiles } from "../hooks/useStatefulFiles";
 
 export default function AddItems() {
     const [values, handleChange] = useStatefulFields();
     const [files, handleChangeFiles] = useStatefulFiles();
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const newList = useSelector((state) => state.newList);
+    const listCover = useSelector((state) => state.listCover);
     const listItems = useSelector((state) => state.listItems);
 
     // console.log("newList in AddItems:", newList);
     // console.log("listItems in AddItems:", listItems);
+    console.log("listCover in AddItems:", listCover);
+    // console.log("listCover.cover in AddItems:", listCover);
     // console.log("files.file: ", files.file);
-    console.log("error in AddItems:", error);
+    // console.log("error in AddItems:", error);
 
     useEffect(() => {
         // dispatch(getList()); // not using this anymore, add again if user is allowed to refresh on /addItems
@@ -28,18 +31,29 @@ export default function AddItems() {
         let listId = newList[0].id;
         if (!files.file) {
             console.log("no files loaded");
-            setError("No item selected");
+            setError("No file selected");
         } else {
             dispatch(addItems({ files, listId, itemOrder }));
-            setTimeout(setCount(count + 1));
+            setCount(count + 1);
             files.file = "";
             setError("");
         } // how can this be delayed....
         ///////// how to clear set the input values? e.target.value = "";
     };
 
-    const review = () => {
-        // console.log("REVIEW button clicked");
+    const submitCover = () => {
+        let listId = newList[0].id;
+        console.log("UploadCover about to submit for listId", listId);
+        if (!files.file) {
+            console.log("no files loaded");
+            setError("No file selected");
+        } else {
+            dispatch(uploadCover(listId, files));
+            files.file = "";
+            setCount(count + 1);
+            setError("");
+        }
+        console.log("REVIEW button clicked");
     };
 
     const clear = () => {
@@ -47,29 +61,70 @@ export default function AddItems() {
         location.replace("/createList");
         // if there's time, refresh addList but get List info displayed on the page...
     };
+    const review = () => {
+        console.log("REVIEW button clicked");
+        // location.replace("/createList");
+        // if there's time, refresh addList but get List info displayed on the page...
+    };
 
     return (
         <>
             <div id="add-items-container">
                 <div className="list-item" id="file-box">
-                    {newList &&
+                    {/* {newList &&
                         newList.map((list) => (
                             <div key={list.id} id="">
                                 <div id="list-details">
                                     <p>List Title: {list.list_name}</p>
                                     <p>Desc: {list.description}</p>
-                                </div>
-                                <div id="item-files">
-                                    <p>Add items to your list</p>
-                                </div>
-                                <div className="list-item">
-                                    <input
-                                        onChange={handleChange}
-                                        name="name"
-                                        placeholder="Name (Optional)"
-                                        autoComplete="off"
-                                        className="input"
-                                    ></input>
+                                </div> */}
+                    <div id="item-files">
+                        <p>Add items to your list</p>
+                    </div>
+                    <div className="list-item">
+                        {listCover && listCover[0] && (
+                            <img id="grid-image" src={listCover[0].cover} />
+                        )}
+                        <input
+                            onChange={handleChangeFiles}
+                            id="file"
+                            type="file"
+                            name="file"
+                            placeholder="image/*"
+                            className="input-file"
+                            data-multiple-caption="{count} files selected"
+                            multiple
+                        />
+                        <label
+                            className="add-item-button"
+                            id="file-label"
+                            htmlFor="file"
+                        >
+                            Select cover
+                        </label>
+                        <button
+                            onClick={submitCover}
+                            className="add-item-button"
+                        >
+                            Upload cover
+                        </button>
+                    </div>
+                    {/* <div id="friends-image-container">
+                                    <img className="friends-image" />
+                                </div> */}
+                    {/* </div> */}
+                    {/* ))} */}
+                </div>
+                <div id="grid-layout">
+                    <>
+                        <div className="list-item">
+                            {count < 1 && <div id="index">1</div>}
+
+                            {listItems && listItems[0] && (
+                                <img id="grid-image" src={listItems[0].url} />
+                            )}
+                            {listCover && listCover[0] && (
+                                <>
                                     <input
                                         onChange={handleChangeFiles}
                                         id="file"
@@ -88,47 +143,13 @@ export default function AddItems() {
                                         Select item
                                     </label>
                                     <button
-                                        // onClick={submit}
+                                        onClick={() => submit(1)}
                                         className="add-item-button"
                                     >
-                                        Load item
+                                        Upload item
                                     </button>
-                                </div>
-                                <div id="friends-image-container">
-                                    <img className="friends-image" />
-                                </div>
-                            </div>
-                        ))}
-                </div>
-                <div id="grid-layout">
-                    <>
-                        <div className="list-item">
-                            {listItems && listItems[0] && (
-                                <img id="grid-image" src={listItems[0].url} />
+                                </>
                             )}
-                            <input
-                                onChange={handleChangeFiles}
-                                id="file"
-                                type="file"
-                                name="file"
-                                placeholder="image/*"
-                                className="input-file"
-                                data-multiple-caption="{count} files selected"
-                                multiple
-                            />
-                            <label
-                                className="add-item-button"
-                                id="file-label"
-                                htmlFor="file"
-                            >
-                                Select item
-                            </label>
-                            <button
-                                onClick={() => submit(1)}
-                                className="add-item-button"
-                            >
-                                Load item
-                            </button>
                         </div>
                     </>
                     <div className="list-item">
@@ -159,7 +180,7 @@ export default function AddItems() {
                                     onClick={() => submit(2)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -192,7 +213,7 @@ export default function AddItems() {
                                     onClick={() => submit(3)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -225,7 +246,7 @@ export default function AddItems() {
                                     onClick={() => submit(4)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -258,7 +279,7 @@ export default function AddItems() {
                                     onClick={() => submit(5)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -291,7 +312,7 @@ export default function AddItems() {
                                     onClick={() => submit(6)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -324,7 +345,7 @@ export default function AddItems() {
                                     onClick={() => submit(7)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -357,7 +378,7 @@ export default function AddItems() {
                                     onClick={() => submit(8)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
@@ -390,7 +411,7 @@ export default function AddItems() {
                                     onClick={() => submit(9)}
                                     className="add-item-button"
                                 >
-                                    Load item
+                                    Upload item
                                 </button>
                             </>
                         )}
