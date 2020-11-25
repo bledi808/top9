@@ -183,20 +183,91 @@ app.post("/api/listComplete/:listId", async (req, res) => {
         console.log("err in POST /api/listComplete/:listId", err);
     }
 });
-app.post("/api/favourite/:listId", async (req, res) => {
-    console.log("ACCESSED POST /api/favourite/:listId route ");
+
+app.get(`/api/favouriteStatus/:listId`, async (req, res) => {
+    console.log("ACCESSED GET /api/favouriteStatus/:listId route");
+    const { userId } = req.session;
     const { listId } = req.params;
+    console.log("req.body", req.body);
+    console.log("userId", userId);
+    console.log("listId", listId);
+    try {
+        let { rows } = await db.checkFavouriteStatus(userId, listId);
+        console.log("rows in fave status: ", rows);
+        if (rows.length == 0) {
+            res.json({
+                status: "Add to Favourites",
+            });
+        } else {
+            res.json({
+                status: "Remove from Favourites",
+            });
+        }
+    } catch (err) {
+        console.log(
+            "err in /api/favouriteStatus/:listId with checkFavouriteStatus",
+            err
+        );
+    }
+});
+
+app.get(`/api/friendStatus/:otherId`, async (req, res) => {
+    console.log("ACCESSED GET /api/friendStatus/:otherId route");
+    const { otherId } = req.params;
     const { userId } = req.session;
 
-    // let { rows } = db.getFavourites(userId);
-
     try {
-        let { rows } = await db.addToFavourites(listId, userId);
-        res.json({
-            rows,
-        });
+        let { rows } = await db.checkFriendStatus(userId, otherId);
+        if (rows.length == 0) {
+            res.json({
+                status: "Send Friend Request",
+            });
+        } else if (!rows[0].accepted && rows[0].sender_id == userId) {
+            res.json({
+                status: "Cancel Friend Request",
+            });
+        } else if (!rows[0].accepted && rows[0].sender_id == otherId) {
+            res.json({
+                status: "Accept Friend Request",
+            });
+        } else if (rows[0].accepted) {
+            res.json({
+                status: "Remove Friend",
+            });
+        }
     } catch (err) {
-        console.log("err in POST /api/favourite/:listId", err);
+        console.log(
+            "err in /api/friendStatus/:otherId with checkFriendStatus",
+            err
+        );
+    }
+});
+
+app.post("/api/favourite", async (req, res) => {
+    console.log("ACCESSED POST /api/favourite route ");
+    const { buttonText, listId } = req.body;
+    const { userId } = req.session;
+    console.log("req.body: ", req.body);
+
+    if (buttonText == "Add to Favourites") {
+        try {
+            await db.addToFavourites(listId, userId);
+            res.json({
+                status: "Remove from Favourites",
+            });
+        } catch (err) {
+            console.log("err in POST /api/favourite", err);
+        }
+    }
+    if (buttonText == "Remove from Favourites") {
+        try {
+            await db.removeFromFavourites(listId, userId);
+            res.json({
+                status: "Add to Favourites",
+            });
+        } catch (err) {
+            console.log("err in POST /api/favourite", err);
+        }
     }
 });
 

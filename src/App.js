@@ -86,14 +86,22 @@ export default class App extends React.Component {
             <BrowserRouter>
                 <div id="app-container">
                     <header id="app-header">
-                        <Link
+                        {/* <Link
                             to="/createList"
                             style={{
                                 textDecoration: "none",
                             }}
                         >
                             <p>Create List</p>
-                        </Link>
+                        </Link> */}
+                        <a
+                            href="/createList"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <p>Create List</p>
+                        </a>
                         <Link
                             to="/addItems"
                             style={{
@@ -151,7 +159,10 @@ export default class App extends React.Component {
                         </div>
                     </header>
                     <div id="app-body">
-                        <Route path="/createList" component={CreateList} />
+                        <Route
+                            path="/createList"
+                            render={() => <CreateList />}
+                        />
                         <Route path="/addItems" component={AddItems} />
                         <Route path="/explore" component={Explore} />
                         <Route path="/favourites" component={Favourites} />

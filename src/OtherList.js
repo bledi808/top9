@@ -11,14 +11,14 @@ export default function OtherList(props) {
     const [next, setNext] = useState();
     const [previous, setPrevious] = useState();
     const [current, setCurrent] = useState(props.match.params.listId);
-    const [buttonText, setButtonText] = useState("Add to Favourites");
+    const [buttonText, setButtonText] = useState("");
 
     let listId = props.match.params.listId;
 
-    console.log("listId:", listId);
-    console.log("current :", current);
-    console.log("next:", next);
-    console.log("previous:", previous);
+    // console.log("listId:", listId);
+    // console.log("current :", current);
+    // console.log("next:", next);
+    // console.log("previous:", previous);
 
     // console.log("listDoesNotExist in OtherList: ", listDoesNotExist);
 
@@ -30,6 +30,17 @@ export default function OtherList(props) {
         if (listDoesNotExist) {
             location.replace("/");
         }
+        (async () => {
+            try {
+                let { data } = await axios.get(
+                    `/api/favouriteStatus/${listId}`
+                );
+                console.log("{data} from useEffect axios in OtherList", data);
+                setButtonText(data.status);
+            } catch (err) {
+                console.log("err in useEffect axios in OtherList", err);
+            }
+        })();
     }, [listDoesNotExist, current]);
 
     const setNextPrevious = async () => {
@@ -50,22 +61,16 @@ export default function OtherList(props) {
     };
     const addToFavourite = async () => {
         try {
-            let { data } = await axios.post(`/api/favourite/${listId}`);
+            let { data } = await axios.post(`/api/favourite`, {
+                buttonText,
+                listId,
+            });
             console.log("data in favourite axios in OtherProfile", data);
+            setButtonText(data.status);
         } catch (err) {
             console.log("err in GET /api/getListById/:listId", err);
         }
     };
-
-    //  try {
-    //             let { data } = await axios.post(`/api/friendStatus/button`, {
-    //                 buttonText,
-    //                 otherId,
-    //             });
-    //             setButtonText(data.status);
-    //         } catch (err) {
-    //             console.log("err in submit() axios in FriendButton", err);
-    //         }
 
     return (
         <>

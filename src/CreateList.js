@@ -37,6 +37,7 @@ export default function CreateList() {
                             onChange={handleChange}
                             className="reg-input"
                             autoComplete="off"
+                            required
                         ></input>
                         <input
                             name="description"

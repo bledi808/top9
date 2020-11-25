@@ -101,12 +101,34 @@ module.exports.completeList = (listId) => {
     );
 };
 
+//check favourite status
+module.exports.checkFavouriteStatus = (userId, listId) => {
+    return db.query(
+        `
+        SELECT * FROM favourites
+        WHERE (user_id = $1 AND list_id = $2)
+        `,
+        [userId, listId]
+    );
+};
+
 module.exports.addToFavourites = (listId, userId) => {
     return db.query(
         `
         INSERT INTO favourites 
         (list_id, user_id)
         VALUES($1,$2)
+        RETURNING *
+        `,
+        [listId, userId]
+    );
+};
+
+module.exports.removeFromFavourites = (listId, userId) => {
+    return db.query(
+        `
+        DELETE FROM favourites
+        WHERE list_id=$1 AND user_id=$2
         RETURNING *
         `,
         [listId, userId]
@@ -225,106 +247,6 @@ module.exports.getNextPreviousListId = (listId) => {
         [listId]
     );
 };
-
-// //check friendship status
-// module.exports.checkFriendStatus = (userId, otherId) => {
-//     return db.query(
-//         `
-//         SELECT * FROM friendships
-//         WHERE (recipient_id = $1 AND sender_id = $2)
-//         OR (recipient_id = $2 AND sender_id = $1)
-//         `,
-//         [userId, otherId]
-//     );
-// };
-
-// //INSERT - runs when you send a friend request
-// module.exports.sendFriendRequest = (userId, otherId) => {
-//     return db.query(
-//         `
-//         INSERT INTO friendships
-//         (sender_id, recipient_id)
-//         VALUES($1, $2);
-//         `,
-//         [userId, otherId]
-//     );
-// };
-
-// module.exports.cancelFriendRequest = (userId, otherId) => {
-//     return db.query(
-//         `
-//         DELETE FROM friendships
-//         WHERE sender_id=$1 AND recipient_id=$2
-//         `,
-//         [userId, otherId]
-//     );
-// };
-
-// module.exports.acceptFriendRequest = (userId, otherId) => {
-//     return db.query(
-//         `
-//         UPDATE friendships
-//         SET accepted=true
-//         WHERE sender_id=$2 AND recipient_id=$1
-//         `,
-//         [userId, otherId]
-//     );
-// };
-
-// module.exports.removeFriend = (userId, otherId) => {
-//     return db.query(
-//         `
-//         DELETE FROM friendships
-//         WHERE sender_id=$1 AND recipient_id=$2
-//         OR sender_id=$2 AND recipient_id=$1
-//         `,
-//         [userId, otherId]
-//     );
-// };
-
-// // Get Friends, receivedRequests and sentRequests
-
-// module.exports.getFriends = (userId) => {
-//     return db.query(
-//         `
-//         SELECT users.id, first, last, url, accepted, sender_id, recipient_id
-//         FROM friendships
-//         JOIN users
-//         ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
-//         OR (accepted = false AND sender_id = $1 AND recipient_id = users.id)
-//         OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
-//         OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)
-//         `,
-//         [userId]
-//     );
-// };
-
-//chatHistory - get last 10 chat messages
-// module.exports.getChatHistory = () => {
-//     return db.query(
-//         `
-//         SELECT users.id AS user_id, first, last, url, chat.id AS chat_id, message, sender_id, chat.timestamp
-//         FROM chat
-//         JOIN users
-//         ON (sender_id=users.id)
-//         ORDER BY chat.id DESC
-//         LIMIT 10;
-//         `
-//     );
-// };
-
-// insert new message to chat history
-// module.exports.insertMessage = (message, senderId) => {
-//     return db.query(
-//         `
-//         INSERT INTO chat
-//         (message, sender_id)
-//         VALUES($1,$2)
-//         RETURNING *
-//         `,
-//         [message, senderId]
-//     );
-// };
 
 // delete account
 // module.exports.deleteAccount = (userId) => {
