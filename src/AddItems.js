@@ -63,21 +63,21 @@ export default function AddItems() {
     };
     const review = () => {
         console.log("REVIEW button clicked");
-        // location.replace("/createList");
-        // if there's time, refresh addList but get List info displayed on the page...
     };
 
     return (
         <>
             <div id="add-items-container">
                 <div className="list-item" id="file-box">
-                    {/* {newList &&
+                    {newList &&
                         newList.map((list) => (
                             <div key={list.id} id="">
                                 <div id="list-details">
                                     <p>List Title: {list.list_name}</p>
                                     <p>Desc: {list.description}</p>
-                                </div> */}
+                                </div>
+                            </div>
+                        ))}
                     <div id="item-files">
                         <p>Add items to your list</p>
                     </div>

@@ -36,11 +36,11 @@ export default function Explore() {
                         mostRecentLists.map((list) => (
                             <div key={list.id} id="search-container">
                                 {/* <div id="search-image-container">
-                                        <img
-                                            className="search-image"
-                                            src={list.url || "/default.jpg"}
-                                        />
-                                    </div> */}
+                                    <img
+                                        className="search-image"
+                                        src={list.cover || "/default.jpg"}
+                                    />
+                                </div> */}
                                 <a className="explore-headings">Title:</a>
                                 <div id="search-name">{list.list_name}</div>
                                 <a className="explore-headings">Description:</a>
