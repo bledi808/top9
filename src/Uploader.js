@@ -99,7 +99,6 @@ export default class Uploader extends React.Component {
                                 htmlFor="file"
                                 className="create-reg"
                                 style={{ fontSize: "medium", width: "150px" }}
-                                // style={{ height: "2em" }}
                             >
                                 Select image
                             </label>

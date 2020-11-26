@@ -27,7 +27,6 @@ export default function Explore() {
                         onChange={(e) =>
                             dispatch(searchListName(e.target.value))
                         }
-                        // defaultValue={search}
                     ></input>
                     {!mostRecentLists && <p>No results</p>}
                 </div>

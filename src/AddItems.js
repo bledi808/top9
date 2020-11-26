@@ -22,9 +22,9 @@ export default function AddItems() {
     // console.log("files.file: ", files.file);
     // console.log("error in AddItems:", error);
 
-    useEffect(() => {
-        // dispatch(getList()); // not using this anymore, add again if user is allowed to refresh on /addItems
-    }, []);
+    // useEffect(() => {
+    //     // dispatch(getList()); // not using this anymore, add again if user is allowed to refresh on /addItems
+    // }, []);
 
     const submit = (itemOrder) => {
         console.log("AddItems about to submit");
@@ -38,7 +38,6 @@ export default function AddItems() {
             files.file = "";
             setError("");
         } // how can this be delayed....
-        ///////// how to clear set the input values? e.target.value = "";
     };
 
     const submitCover = () => {

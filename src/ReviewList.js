@@ -16,13 +16,11 @@ export default function ReviewList() {
     console.log("listId: ", listId);
 
     useEffect(() => {
-        // let listId = newList[0].id;
         dispatch(displayList(listId));
     }, []);
 
     const submit = async () => {
         console.log("DisplayList about to submit");
-        // await dispatch(listComplete());
         try {
             let { data } = await axios.post(`/api/listComplete/${listId}`);
             console.log("{data} in completeList() axios", data);
@@ -35,7 +33,6 @@ export default function ReviewList() {
     const clear = () => {
         console.log("CLEAR button clicked");
         location.replace("/createList");
-        // if there's time, refresh addList but get List info displayed on the page...
     };
 
     return (

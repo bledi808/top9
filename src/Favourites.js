@@ -16,19 +16,6 @@ export default function Explore() {
     return (
         <>
             <div id="explore-layout">
-                {/* <div id="search-input-div">
-                    <input
-                        className="reg-input"
-                        id="search-input"
-                        autoComplete="off"
-                        placeholder="Search favourites by name"
-                        onChange={(e) =>
-                            dispatch(searchListName(e.target.value))
-                        }
-                        defaultValue={search}
-                    ></input>
-                    {!mostRecentLists && <p>No results</p>}
-                </div> */}
                 <div
                     className="explore-results"
                     id="explore-results-favourites"
