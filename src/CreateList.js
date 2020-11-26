@@ -25,8 +25,8 @@ export default function CreateList() {
                 <div>
                     <p id="create-header">Create a new list</p>
                     <p id="create-subheader">
-                        We need a title for your top-9. You are free to also add
-                        a description.
+                        We need a title for your top-9. You can also choose to
+                        add a description.
                     </p>
                 </div>
                 <div className="form-layout">

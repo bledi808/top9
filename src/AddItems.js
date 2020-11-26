@@ -17,7 +17,7 @@ export default function AddItems() {
 
     // console.log("newList in AddItems:", newList);
     // console.log("listItems in AddItems:", listItems);
-    console.log("listCover in AddItems:", listCover);
+    // console.log("listCover in AddItems:", listCover);
     // console.log("listCover.cover in AddItems:", listCover);
     // console.log("files.file: ", files.file);
     // console.log("error in AddItems:", error);
@@ -68,7 +68,7 @@ export default function AddItems() {
     return (
         <>
             <div id="add-items-container">
-                <div className="" id="file-box">
+                <div className="" className="list-tile" id="list-tile-add">
                     <div className="" id="cover-img-container">
                         {listCover && listCover[0] && (
                             <img id="cover-img" src={listCover[0].cover} />
@@ -98,17 +98,7 @@ export default function AddItems() {
                     {newList &&
                         newList.map((list) => (
                             <div key={list.id} id="list-info">
-                                {/* <div id="list-info"> */}
                                 <div id="list-details">
-                                    {/* <p id="list-title">
-                                Classic football tops after mid-century
-                            </p>
-                            <p id="list-description">
-                                This is a list of classic football, soccer,
-                                whatever you wanna call it, tops. This is a list
-                                of classic football, soccer, whatever you wanna
-                                call it, tops.
-                            </p> */}
                                     <p id="list-title">{list.list_name}</p>
                                     <p id="list-description">
                                         {list.description}

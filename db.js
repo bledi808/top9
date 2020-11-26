@@ -196,7 +196,7 @@ module.exports.getLatestLists = () => {
         SELECT * FROM lists
         WHERE complete=true
         ORDER BY id
-        DESC LIMIT 6;
+        DESC LIMIT 4;
         `
     );
 };
@@ -208,9 +208,9 @@ module.exports.searchListName = (str) => {
         SELECT * FROM lists
         WHERE (complete=true AND list_name ILIKE $1) 
         ORDER BY list_name
-        ASC LIMIT 6
+        ASC LIMIT 4
         `,
-        [str + "%"]
+        ["%" + str + "%"]
     );
 };
 

@@ -14,6 +14,18 @@ export default class Uploader extends React.Component {
             [e.target.name]: e.target.files[0],
             newImage: e.target.files[0].name,
         });
+        let labelName = e.target.files[0].name;
+        var inputs = document.querySelectorAll(".input-file");
+        Array.prototype.forEach.call(inputs, function (input) {
+            var label = input.nextElementSibling,
+                labelVal = labelName;
+            var fileName = "";
+            if (fileName) {
+                label.querySelector("span").innerHTML = fileName;
+            } else {
+                label.innerHTML = labelVal;
+            }
+        });
     }
 
     async uploadImage() {

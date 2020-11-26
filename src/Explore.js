@@ -23,7 +23,7 @@ export default function Explore() {
                         className="reg-input"
                         id="search-input"
                         autoComplete="off"
-                        placeholder="Explore lists by name"
+                        placeholder="Search lists by name"
                         onChange={(e) =>
                             dispatch(searchListName(e.target.value))
                         }
@@ -31,21 +31,28 @@ export default function Explore() {
                     ></input>
                     {!mostRecentLists && <p>No results</p>}
                 </div>
-                <div id="search-layout">
+                <div className="explore-results">
                     {mostRecentLists &&
                         mostRecentLists.map((list) => (
-                            <div key={list.id} id="search-container">
-                                {/* <div id="search-image-container">
+                            <div
+                                key={list.id}
+                                className="list-tile"
+                                id="list-tile-explore"
+                            >
+                                <div className="" id="cover-img-container">
                                     <img
-                                        className="search-image"
-                                        src={list.cover || "/default.jpg"}
+                                        id="cover-img-explore"
+                                        src={list.cover}
                                     />
-                                </div> */}
-                                <a className="explore-headings">Title:</a>
-                                <div id="search-name">{list.list_name}</div>
-                                <a className="explore-headings">Description:</a>
-                                <div id="search-name">{list.description}</div>
-                                <a className="explore-headings">Added:</a>
+                                </div>
+                                <div id="list-info">
+                                    <div id="list-details">
+                                        <p id="list-title">{list.list_name}</p>
+                                        <p id="list-description">
+                                            {list.description}
+                                        </p>
+                                    </div>
+                                </div>
                                 <div id="explore-link-div">
                                     <div id="explore-timestamp">
                                         {list.created_at.slice(11, 16)}
@@ -58,7 +65,15 @@ export default function Explore() {
                                             textDecoration: "none",
                                         }}
                                     >
-                                        <div id="view-list">View</div>
+                                        <button
+                                            id="continue-create"
+                                            className="create-reg"
+                                            style={{
+                                                fontSize: "13px",
+                                            }}
+                                        >
+                                            View
+                                        </button>
                                     </Link>
                                 </div>
                             </div>

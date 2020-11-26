@@ -25,7 +25,7 @@ export default function ReviewList() {
         try {
             let { data } = await axios.post(`/api/listComplete/${listId}`);
             console.log("{data} in completeList() axios", data);
-            location.replace("/");
+            location.replace("/explore");
         } catch (err) {
             console.log("err in POST /api/getListById/:listId", err);
         }

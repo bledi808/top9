@@ -98,7 +98,7 @@ export default class App extends React.Component {
                             href="/createList"
                             style={{
                                 textDecoration: "none",
-                                color: "#408ea3",
+                                color: "#161113",
                             }}
                         >
                             <p>CREATE</p>
@@ -123,7 +123,7 @@ export default class App extends React.Component {
                             to="/explore"
                             style={{
                                 textDecoration: "none",
-                                color: "#408ea3",
+                                color: "#161113",
                             }}
                         >
                             <p>EXPLORE</p>

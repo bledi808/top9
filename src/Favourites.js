@@ -15,47 +15,71 @@ export default function Explore() {
 
     return (
         <>
-            FAVOURITES
-            <div id="search-layout">
-                {favourites &&
-                    favourites.map((list) => (
-                        <div key={list.id} id="search-container">
-                            {/* <div id="search-image-container">
-                                        <img
-                                            className="search-image"
-                                            src={list.url || "/default.jpg"}
-                                        />
-                                    </div> */}
-                            <a className="explore-headings">Title:</a>
-                            <div id="search-name">{list.list_name}</div>
-                            <a className="explore-headings">Description:</a>
-                            <div id="search-name">{list.description}</div>
-                            <a className="explore-headings">Added:</a>
-                            <div id="explore-link-div">
-                                <div id="explore-timestamp">
-                                    {list.created_at.slice(11, 16)}
-                                    {"   "}
-                                    {list.created_at.split("T")[0]}
+            <div id="explore-layout">
+                {/* <div id="search-input-div">
+                    <input
+                        className="reg-input"
+                        id="search-input"
+                        autoComplete="off"
+                        placeholder="Search favourites by name"
+                        onChange={(e) =>
+                            dispatch(searchListName(e.target.value))
+                        }
+                        defaultValue={search}
+                    ></input>
+                    {!mostRecentLists && <p>No results</p>}
+                </div> */}
+                <div
+                    className="explore-results"
+                    id="explore-results-favourites"
+                >
+                    {favourites &&
+                        favourites.map((list) => (
+                            <div
+                                key={list.id}
+                                className="list-tile"
+                                id="list-tile-favourites"
+                            >
+                                <div className="" id="cover-img-container">
+                                    <img
+                                        id="cover-img-explore"
+                                        src={list.cover}
+                                    />
                                 </div>
-                                <Link
-                                    to={`/displayList/${list.list_id}`}
-                                    style={{
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    <div id="view-list">View</div>
-                                </Link>
-                                {/* <Link
-                                    to={`/displayList/${list.lisid}`}
-                                    style={{
-                                        textDecoration: "none",
-                                    }}
-                                > */}
-                                <div id="view-list">Remove</div>
-                                {/* </Link> */}
+                                <div id="list-info">
+                                    <div id="list-details">
+                                        <p id="list-title">{list.list_name}</p>
+                                        <p id="list-description">
+                                            {list.description}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="explore-link-div">
+                                    <div id="explore-timestamp">
+                                        {list.created_at.slice(11, 16)}
+                                        {"   "}
+                                        {list.created_at.split("T")[0]}
+                                    </div>
+                                    <Link
+                                        to={`/displayList/${list.id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        <button
+                                            id="continue-create"
+                                            className="create-reg"
+                                            style={{
+                                                fontSize: "13px",
+                                            }}
+                                        >
+                                            View
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                </div>
             </div>
         </>
     );
