@@ -75,8 +75,8 @@ export default class Login extends React.Component {
                             <div id="already-reg">
                                 <button
                                     onClick={() => this.submit()}
-                                    id="submit-reg"
-                                    // className="button"
+                                    id="continue-create"
+                                    className="create-reg" // className="button"
                                 >
                                     Log in
                                 </button>

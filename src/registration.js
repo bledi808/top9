@@ -87,7 +87,9 @@ export default class Registration extends React.Component {
                                 <button
                                     onClick={() => this.submit()}
                                     id="submit-reg"
-                                    className="button"
+                                    // className="button"
+                                    id="continue-create"
+                                    className="create-reg"
                                 >
                                     Register
                                 </button>

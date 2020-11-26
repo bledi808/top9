@@ -9,10 +9,6 @@ import Explore from "./Explore";
 import Favourites from "./Favourites";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-// import Logo from "./Logo"; // create logo component
-// import Profile from "./Profile";
-// import FindPeople from "./FindPeople";
-// import NavBar from "./NavBar";
 
 export default class App extends React.Component {
     constructor() {
@@ -22,9 +18,7 @@ export default class App extends React.Component {
             headerImgClass: "header-image-container",
             profileImgClass: "big-image-container",
         };
-        //bind functions
         this.methodInApp = this.methodInApp.bind(this);
-        // this.updateBioInApp = this.updateBioInApp.bind(this);
     }
 
     async componentDidMount() {
@@ -56,93 +50,40 @@ export default class App extends React.Component {
         this.setState({ imgUrl: arg });
     }
 
-    // updateBioInApp(arg) {
-    //     this.setState({ bio: arg });
-    //     () => {
-    //         // console.log("state in App after UpdateBioInApp", this.state);
-    //     };
-    // }
-
-    logOut() {
-        axios.get("/api/logout").then(() => {
-            location.replace("/welcome#/login");
-        });
-    }
-
-    // deleteAccount() {
-    //     // console.log("delete Acct clicked");
-    //     axios
-    //         .get("/api/delete/account")
-    //         .then(() => {
-    //             location.replace("/");
-    //         })
-    //         .catch(function (err) {
-    //             console.log("error in axios POST /upload", err);
-    //         });
-    // }
-
     render() {
         return (
             <BrowserRouter>
                 <div id="app-container">
                     <header id="app-header">
-                        {/* <Link
-                            to="/createList"
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <p>Create List</p>
-                        </Link> */}
-                        <a
-                            href="/createList"
-                            style={{
-                                textDecoration: "none",
-                                color: "#161113",
-                            }}
-                        >
-                            <p>Create</p>
-                        </a>
-                        {/* <Link
-                            to="/addItems"
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <p>Add Items</p>
-                        </Link>
-                        <Link
-                            to="/reviewList"
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <p>Review List </p>
-                        </Link> */}
-                        <Link
-                            to="/explore"
-                            style={{
-                                textDecoration: "none",
-                                color: "#161113",
-                            }}
-                        >
-                            <p>Explore</p>
-                        </Link>
-                        <Link
-                            to="/favourites"
-                            style={{
-                                textDecoration: "none",
-                                color: "#408ea3",
-                            }}
-                        >
-                            <p>Favourites</p>
-                        </Link>
-                        <button
-                            onClick={this.logOut}
-                            // className="navbar-buttons"
-                        >
-                            Log Out
-                        </button>
+                        <div id="main-nav-items">
+                            <Link
+                                to="/"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "#161113",
+                                }}
+                            >
+                                <p id="explore-header">Explore</p>
+                            </Link>
+                            <a
+                                href="/createList"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "#161113",
+                                }}
+                            >
+                                <p id="create-header">Create</p>
+                            </a>
+                            <Link
+                                to="/favourites"
+                                style={{
+                                    textDecoration: "none",
+                                    color: "#161113",
+                                }}
+                            >
+                                <p id="favourites-header">Favourites</p>
+                            </Link>
+                        </div>
                         <div id="header-profile-layout">
                             <p id="header-profile-name">
                                 {this.state.first} {this.state.last}
@@ -152,8 +93,6 @@ export default class App extends React.Component {
                                 id="profile-cont"
                             >
                                 <ProfilePic
-                                    // first={this.state.first}
-                                    // last={this.state.last}
                                     imgUrl={this.state.imgUrl}
                                     toggleUploader={() => this.toggleUploader()}
                                     imgClass={this.state.headerImgClass}
@@ -167,7 +106,7 @@ export default class App extends React.Component {
                             render={() => <CreateList />}
                         />
                         <Route path="/addItems" component={AddItems} />
-                        <Route path="/explore" component={Explore} />
+                        <Route exact path="/" component={Explore} />
                         <Route path="/favourites" component={Favourites} />
                         <Route
                             exact
@@ -190,52 +129,9 @@ export default class App extends React.Component {
                             <Uploader
                                 methodInApp={this.methodInApp}
                                 imgUrl={this.state.imgUrl}
-                                // toggleUploader={() => this.toggleUploader()}
                             />
                         )}
                     </div>
-                    {/* <div id="app-body">
-                        <NavBar logoutButton={() => this.logOut()} />
-                        <div id="app-content">
-                            <Route
-                                exact
-                                path="/"
-                                render={() => (
-                                    <Profile
-                                        first={this.state.first}
-                                        last={this.state.last}
-                                        imgUrl={this.state.profileUrl}
-                                        bio={this.state.bio}
-                                        profileImgClass={
-                                            this.state.profileImgClass
-                                        }
-                                        toggleUploader={() =>
-                                            this.toggleUploader()
-                                        }
-                                        updateBioInApp={this.updateBioInApp}
-                                        deleteAccount={this.deleteAccount}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/user/:id"
-                                render={(props) => (
-                                    <OtherProfile
-                                        key={props.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/users"
-                                render={() => <FindPeople />}
-                            />
-                            <Route path="/friends" render={() => <Friends />} />
-                            
-                            <Route path="/chat" component={Chat} />
-                        </div>
-                    </div> */}
                 </div>
             </BrowserRouter>
         );

@@ -49,7 +49,8 @@ export default class Reset extends React.Component {
                             <div id="already-reg">
                                 <button
                                     onClick={() => this.next()}
-                                    id="submit-reg"
+                                    id="continue-create"
+                                    className="create-reg"
                                 >
                                     Next
                                 </button>
@@ -100,7 +101,8 @@ export default class Reset extends React.Component {
                             <div id="already-reg">
                                 <button
                                     onClick={() => this.submit()}
-                                    id="submit-reg"
+                                    id="continue-create"
+                                    className="create-reg"
                                 >
                                     Submit
                                 </button>
@@ -136,7 +138,7 @@ export default class Reset extends React.Component {
                             }}
                         >
                             {" "}
-                            <span className="link">Log in</span>
+                            <span className="reset-link">Log in</span>
                         </Link>{" "}
                         with new password
                     </p>

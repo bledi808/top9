@@ -6,9 +6,6 @@
 body {
     font-family: "roboto", sans-serif;
     color: #161113;
-    /* background-color: #fa7f72; */
-    /* background-color: teal; */
-    /* background-color: gainsboro; */
 }
 
 /* HEADER TOP 9 */
@@ -21,6 +18,27 @@ body {
     display: flex;
     align-items: flex-end;
 }
+
+#main-nav-items {
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px black solid; */
+    width: 250px;
+}
+#create-header:hover {
+    color: #408ea3;
+}
+#create-header:focus {
+    color: #408ea3;
+}
+
+#explore-header:hover {
+    color: #408ea3;
+}
+#favourites-header:hover {
+    color: #408ea3;
+}
+
 #header-profile-name {
     /* border: 1px solid blue; */
     margin-right: 3%;
@@ -28,11 +46,6 @@ body {
     width: 150px;
     text-align: right;
     margin-bottom: -4px;
-}
-
-#header-profile-name:hover {
-    color: rgb(223, 73, 73);
-    cursor: pointer;
 }
 
 #profile-cont {
@@ -43,7 +56,6 @@ body {
 
 .header-image-container {
     /* border: 1px solid blue; */
-    /* margin-top: 10%; */
     height: 100px;
     overflow: hidden;
     width: 100px;
@@ -58,36 +70,17 @@ body {
 
 /* LOGGED IN STATE: TOP 9999999999 */
 #app-container {
-    /* background-color: linen;
-    background-color: white; */
-    /* background-color: #eef2f3; */
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* background-color: #eef2f3; */
-    background-color: whitesmoke;
-    background-color: white;
-    background-color: linen;
     background-color: #eef2f3;
-
-    /* background-color: lightgrey; */
-
-    /* border: 15px green solid; */
     overflow: hidden;
 }
-#app-navbar {
-    background-color: #eef2f3;
-    background-color: #494949;
-    background-color: whitesmoke;
-}
+
 #app-header {
     /* border-bottom: 1px navy solid; */
-    background-color: #494949;
-    background-color: whitesmoke;
     background-color: rgba(255, 255, 255, 0.98);
-    background-color: rgb(255, 255, 255);
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15);
-
     display: flex;
     padding-bottom: 3px;
     justify-content: space-between;
@@ -95,12 +88,9 @@ body {
     padding: 0 3% 0 3%;
     padding-bottom: 5px;
     height: 12%;
-    /* color: #383838; */
-    color: #408ea3;
+    /* color: #408ea3; */
     color: #161113;
     font-size: large;
-
-    /* text-transform: uppercase; */
 }
 
 #app-body {
@@ -124,8 +114,6 @@ body {
     font-size: 90%;
     height: 1.5em;
     width: 120px;
-    /* border-right: 1px black solid; */
-    /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
 }
 
 .input-file {
@@ -274,75 +262,6 @@ body {
     padding: 3% 0 10% 0;
 }
 
-/* Profile */
-
-#profile {
-    /* border: 1px magenta solid; */
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile-pic:hover {
-    filter: grayscale(100%);
-    cursor: pointer;
-}
-
-#bio-name {
-    margin-bottom: 4%;
-}
-
-#bio {
-    /* border: 1px #383838 solid; */
-    /* border-left: 1px transparent solid; */
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    align-items: flex-end;
-    justify-content: flex-end;
-    font-size: medium;
-    padding: 0 1%;
-    text-align: justify;
-}
-
-#bio-textarea-div {
-    /* border: 1px #383838 solid; */
-    width: 385px;
-}
-
-#bio-textarea {
-    border: 1px #383838 solid;
-    resize: none;
-    font-family: "roboto", sans-serif;
-    font-size: medium;
-    padding: 2%;
-    color: darkcyan;
-    margin-bottom: 5px;
-    /* background-color: mistyrose; */
-}
-
-#edit-bio-button {
-    width: 100px;
-    height: 30px;
-}
-#save-bio-button {
-    width: 100px;
-    height: 30px;
-    margin: 1% 0 2% 0;
-}
-#bio-buttons-div {
-    margin: 3% 0 2% 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 385px;
-}
-
-#delete-account-confirmation {
-    margin: 2% 0 10% 0;
-}
-
 /* LOGGED OUT STATE */
 
 /* Registration */
@@ -351,12 +270,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 300px;
+    height: 100vh;
     width: 100vw;
     margin-left: 50%;
     transform: translateX(-50%);
-    background-color: gainsboro;
-    /* background-color: whitesmoke; */
+    background-color: #eef2f3;
+    /* color: #161113; */
     padding-top: 2%;
 }
 
@@ -364,13 +283,16 @@ body {
     margin-top: 8%;
     font-size: 30px;
     color: #f54e3b;
+    color: #161113;
+    color: #408ea3;
+
     width: 350px;
     text-align: right;
 }
 
 .main-container {
     color: white;
-    box-shadow: 2px 2px 5px grey;
+    /* box-shadow: 2px 2px 5px grey; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -380,14 +302,47 @@ body {
     font-size: large;
     margin-top: 3%;
     padding-top: 5%;
-    background-color: #449494d8;
-    background-color: #494949e0;
+    background-color: white;
+    color: #161113;
+    border-radius: 4px;
+}
+.create-container {
+    background-color: white;
+    /* background-color: #494949e0; */
+    padding-top: 30px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 240px;
+
+    color: #161113;
+    border-radius: 4px;
+    margin-top: -40px;
+}
+.reg-input {
+    height: 2em;
+    width: 19em;
+    margin: 5px 0;
+    margin-top: 5px;
+
+    font-family: "roboto", sans-serif;
+    /* color: #383838; */
+    color: rgba(51, 51, 51, 70);
+    border: none;
+    padding: 10px;
+    border: 1px solid #f3f3f3;
+    background: #f3f3f3;
+    border: 1px solid #f3f3f3;
+    border-radius: 3px;
 }
 
 #register {
     text-align: left;
     width: 253px;
     color: whitesmoke;
+    color: #161113;
 }
 
 .form-layout {
@@ -408,22 +363,10 @@ body {
 }
 
 .link {
-    color: linen;
+    color: rgba(255, 99, 71, 0.842);
 }
-
-.link:hover {
-    color: rgb(245, 245, 138);
-    text-decoration: none;
-}
-
-.reg-input {
-    height: 2em;
-    width: 19em;
-    margin: 5px 0;
-    font-family: "roboto", sans-serif;
-    color: #383838;
-    border: none;
-    padding: 10px;
+.reset-link {
+    color: #408ea3;
 }
 
 #submit-reg {
@@ -453,11 +396,11 @@ body {
     text-align: right;
 }
 #reset-link {
-    color: white;
+    color: grey;
     font-size: small;
 }
 #reset-link:hover {
-    color: #e8e8e8;
+    color: lightslategray;
     font-size: small;
 }
 
@@ -466,68 +409,11 @@ body {
     text-align: center;
 }
 
-/* Other Profile */
-#other-bio-layout {
-    display: flex;
-    box-shadow: 3px 3px 8px grey;
-    background-color: white;
-}
-
-#other-image-container {
-    width: 300px;
-    max-height: 450px;
-    /* border: 1px #383838 solid; */
-    overflow: hidden;
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.other-profile-image {
-    width: 300px;
-    overflow: hidden;
-}
-
-#bio-name {
-    color: #383838;
-    margin-bottom: 10px;
-}
-
-#other-bio-text {
-    /* border: 1px #383838 solid; */
-    padding: 3%;
-    margin-bottom: 10px;
-    width: 385px;
-    background-color: lightgoldenrodyellow;
-}
-
-#friend-button {
-    width: 385px;
-    height: 2em;
-    font-size: medium;
-    /* box-shadow: 2px 2px 5px grey; */
-    /* border: none; */
-    margin-bottom: 2%;
-    background-color: whitesmoke;
-}
-
-#friend-button:hover {
-    background-color: #494949;
-    color: white;
-}
-
 .error-msg {
-    color: salmon;
-    font-size: large;
+    color: #494949;
+    font-size: medium;
     /* border: 1px solid whitesmoke; */
     margin-top: 1%;
-}
-
-/* Log out button */
-#log-out-button {
-    width: 80px;
-    height: 25px;
 }
 
 #delete-account-button {
@@ -747,7 +633,7 @@ body {
     margin-top: -40px;
 }
 
-#create-header {
+#create-heading {
     font-size: large;
     text-align: center;
 }
@@ -807,6 +693,19 @@ body {
     border-radius: 2px;
 }
 
+.create-input {
+    margin-top: 5px;
+    font-size: 14px;
+    font-family: "roboto", sans-serif;
+    background: #f3f3f3;
+    border: 1px solid #f3f3f3;
+    border-radius: 3px;
+    width: 280px;
+    height: 36px;
+    color: rgba(51, 51, 51, 70);
+    padding: 5px;
+    /* border: 1px red solid; */
+}
 /* ADD ITEMS PAGE */
 
 #add-items-container {
@@ -1023,12 +922,6 @@ body {
     height: 2em;
     margin: 3% 0 1% 0;
     width: 220px;
-    border: 1px solid #408ea3;
-    background-color: #408ea3;
-    color: white;
-}
-
-#favourite-button:hover {
     border: 1px solid #408ea3;
     background-color: #408ea3;
     color: white;

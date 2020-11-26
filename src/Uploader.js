@@ -59,6 +59,12 @@ export default class Uploader extends React.Component {
         }
     }
 
+    logOut() {
+        axios.get("/api/logout").then(() => {
+            location.replace("/welcome#/login");
+        });
+    }
+
     render() {
         return (
             <>
@@ -89,26 +95,35 @@ export default class Uploader extends React.Component {
                                 className="input-file"
                             />
                             <label
-                                id="uploader-button"
+                                id="continue-create"
                                 htmlFor="file"
-                                className="button"
+                                className="create-reg"
+                                style={{ fontSize: "medium", width: "150px" }}
+                                // style={{ height: "2em" }}
                             >
                                 Select image
                             </label>
                             <div id="uploader-buttons-div">
                                 <button
                                     onClick={() => this.uploadImage()}
-                                    className="button"
-                                    id="uploader-button"
+                                    id="continue-create"
+                                    className="create-reg"
                                 >
                                     Upload image
                                 </button>
                                 <button
                                     onClick={() => this.deleteImage()}
-                                    className="button"
-                                    id="uploader-button"
+                                    id="cancel-create"
+                                    className="create-reg"
                                 >
                                     Remove image
+                                </button>
+                                <button
+                                    onClick={this.logOut}
+                                    id="cancel-create"
+                                    className="create-reg"
+                                >
+                                    Log Out
                                 </button>
                             </div>
                         </div>

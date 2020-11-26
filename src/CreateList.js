@@ -23,9 +23,9 @@ export default function CreateList() {
         <>
             <div className="create-container">
                 <div>
-                    <p id="create-header">Create a new list</p>
+                    <p id="create-heading">Create a new list</p>
                     <p id="create-subheader">
-                        We need a title for your top-9. You can also choose to
+                        We need a title for your top9. You can also choose to
                         add a description.
                     </p>
                 </div>
