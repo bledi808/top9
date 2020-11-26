@@ -330,7 +330,16 @@ app.get(`/api/displayList/:listId`, async (req, res) => {
 
     try {
         let { rows } = await db.displayList(listId);
-        // console.log("rows in displayList", rows);
+        console.log("rows in displayList", rows);
+
+        let listInfo = {
+            list_id: rows[0].list_id,
+            list_name: rows[0].list_name,
+            description: rows[0].description,
+            cover: rows[0].cover,
+            created_at: rows[0].created_at,
+        };
+        console.log("listInfo: ", listInfo);
         // let list = rows;
         if (rows.length == 0) {
             res.json({
@@ -340,6 +349,7 @@ app.get(`/api/displayList/:listId`, async (req, res) => {
             res.json({
                 success: true,
                 rows,
+                listInfo,
             });
         }
     } catch (err) {

@@ -55,7 +55,7 @@ export async function addItems(values) {
 }
 
 export async function displayList(listId) {
-    // console.log("displayList() dispatched from DisplayItems");
+    console.log("displayList() dispatched from DisplayItems");
     console.log("Latest List Id from DisplayList:", listId);
 
     try {
@@ -65,6 +65,7 @@ export async function displayList(listId) {
             return {
                 type: "DISPLAY_LIST",
                 displayList: data.rows,
+                listInfo: data.listInfo,
             };
         } else {
             return {
@@ -94,46 +95,6 @@ export async function searchListName(listName) {
     }
 }
 
-// REDUX not useful for this - doing this in component axios instead
-// export async function listComplete() {
-//     console.log("listComplete dispatched from Display List");
-//     try {
-//         let { data } = await axios.get(`/api/listComplete`);
-//         console.log("{data.rows} in searchListName() action axios", data);
-//         return {
-//             type: "LIST_COMPLETE",
-//         };
-//     } catch (err) {
-//         console.log("err in searchListName() action axios", err);
-//     }
-// }
-
-//no longer being used in addItems - list details are accessed from global state updated by POST createList
-// export async function getList() {
-//     // console.log("getListDetails() dispatched from AddItems");
-//     // let formData = {}; //work out how to contruct this
-//     try {
-//         let { data } = await axios.get(`/api/getListDetails`);
-//         // console.log("{data} in getListDetails() action axios", data);
-//         return {
-//             type: "GET_LIST",
-//             latestList: data.rows,
-//         };
-//     } catch (err) {
-//         console.log("err in getListDetails() action axios", err);
-//     }
-// }
-
-// App ComponentDidMount axios - refactor later (does this need to be wrapped in an async function)
-// try {
-//     let { data } = await axios.get("/api/user");
-//     this.setState({
-//         first: data.rows.first,
-//         last: data.rows.last,
-//         profile_img: data.rows.profile_img,
-//         bio: data.rows.bio,
-//     });
-// }
 export async function latestLists() {
     // console.log("latestLists() dispatched from Explore");
 

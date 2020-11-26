@@ -27,6 +27,7 @@ export default function (state = {}, action) {
     if (action.type == "DISPLAY_LIST") {
         state = Object.assign({}, state, {
             displayList: action.displayList,
+            listInfo: action.listInfo,
         });
     }
     if (action.type == "LATEST_LISTS") {

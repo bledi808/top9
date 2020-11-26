@@ -101,7 +101,7 @@ export default class App extends React.Component {
                                 color: "#161113",
                             }}
                         >
-                            <p>CREATE</p>
+                            <p>Create</p>
                         </a>
                         {/* <Link
                             to="/addItems"
@@ -126,7 +126,7 @@ export default class App extends React.Component {
                                 color: "#161113",
                             }}
                         >
-                            <p>EXPLORE</p>
+                            <p>Explore</p>
                         </Link>
                         <Link
                             to="/favourites"
@@ -135,7 +135,7 @@ export default class App extends React.Component {
                                 color: "#408ea3",
                             }}
                         >
-                            <p>FAVOURITES</p>
+                            <p>Favourites</p>
                         </Link>
                         <button
                             onClick={this.logOut}

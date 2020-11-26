@@ -61,7 +61,7 @@ export default function Explore() {
                                         {list.created_at.split("T")[0]}
                                     </div>
                                     <Link
-                                        to={`/displayList/${list.id}`}
+                                        to={`/displayList/${list.list_id}`}
                                         style={{
                                             textDecoration: "none",
                                         }}

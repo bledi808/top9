@@ -107,7 +107,7 @@ export default function AddItems() {
                             </div>
                         ))}
                 </div>
-                <div id="grid-layout">
+                <div className="grid-layout">
                     <>
                         <div className="list-item">
                             {count < 1 && <div id="index">1</div>}

@@ -8,6 +8,7 @@ export default function OtherList(props) {
     const dispatch = useDispatch();
     const listDoesNotExist = useSelector((state) => state.serverMessage);
     const displayGrid = useSelector((state) => state.displayList);
+    const listInfo = useSelector((state) => state.listInfo);
     const [next, setNext] = useState();
     const [previous, setPrevious] = useState();
     const [current, setCurrent] = useState(props.match.params.listId);
@@ -15,11 +16,11 @@ export default function OtherList(props) {
 
     let listId = props.match.params.listId;
 
+    console.log("listInfo in OtherList:", listInfo);
     // console.log("listId:", listId);
     // console.log("current :", current);
     // console.log("next:", next);
     // console.log("previous:", previous);
-
     // console.log("listDoesNotExist in OtherList: ", listDoesNotExist);
 
     useEffect(() => {
@@ -75,40 +76,84 @@ export default function OtherList(props) {
     return (
         <>
             <div id="add-items-container">
-                <div id="grid-layout">
+                {listInfo && (
+                    <div className="list-tile" id="list-tile-other">
+                        <div className="" id="cover-img-container">
+                            <img id="cover-img-explore" src={listInfo.cover} />
+                        </div>
+                        <div id="list-info">
+                            <div id="list-details">
+                                <p id="list-title">{listInfo.list_name}</p>
+                                <p id="list-description">
+                                    {listInfo.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div id="explore-link-div-other">
+                            <div id="explore-timestamp">
+                                {listInfo.created_at.slice(11, 16)}
+                                {"   "}
+                                {listInfo.created_at.split("T")[0]}
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                                onClick={addToFavourite}
+                                id="favourite-button"
+                                className="create-reg"
+                            >
+                                {buttonText}
+                            </button>
+                        </div>
+                    </div>
+                )}
+                <div className="grid-layout" id="grid-layout-other">
                     {displayGrid &&
                         displayGrid
                             .slice()
                             .reverse()
-                            .map((item, i) => (
-                                <div key={item.item_id} className="list-item">
+                            .map((item) => (
+                                <div
+                                    key={item.item_id}
+                                    className="list-item"
+                                    id="list-item-other"
+                                >
                                     <img id="grid-image" src={item.url} />
                                 </div>
                             ))}
                 </div>
-                <div id="reg-actions">
-                    <Link
-                        to="/explore"
-                        style={{
-                            textDecoration: "none",
-                        }}
-                    >
-                        <button id="submit-reg">Back to Explore</button>
-                    </Link>
-
+                <div id="other-list-actions">
                     <Link to={"/displayList/" + next}>
-                        <button onClick={nextList} id="submit-reg">
-                            Next
+                        <button
+                            onClick={nextList}
+                            id="continue-create"
+                            className="create-reg"
+                            style={{
+                                fontSize: "17px",
+                                width: "180px",
+                                marginBottom: "5%",
+                                height: "2em",
+                            }}
+                        >
+                            Next List ❯
                         </button>
                     </Link>
                     <Link to={"/displayList/" + previous}>
-                        <button onClick={previousList} id="submit-reg">
-                            Previous
+                        <button
+                            onClick={previousList}
+                            id="cancel-create"
+                            className="create-reg"
+                            style={{
+                                fontSize: "17px",
+                                width: "180px",
+                                marginTop: "5%",
+                                margin: "5% 0",
+                                height: "2em",
+                            }}
+                        >
+                            ❮ Previous List
                         </button>
                     </Link>
-                    <button onClick={addToFavourite} id="submit-reg">
-                        {buttonText}
-                    </button>
                 </div>
             </div>
         </>

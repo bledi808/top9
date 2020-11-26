@@ -177,7 +177,7 @@ module.exports.getFavourites = (userId) => {
 module.exports.displayList = (listId) => {
     return db.query(
         `
-        SELECT lists.id AS list_id, list_items.id AS item_id, list_name, description, item_order, url
+        SELECT lists.id AS list_id, lists.cover, lists.created_at, list_items.id AS item_id, list_name, description, item_order, url
         FROM list_items
         INNER JOIN lists
         ON (lists.id = list_items.list_id)

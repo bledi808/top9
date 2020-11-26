@@ -98,6 +98,7 @@ body {
     /* color: #383838; */
     color: #408ea3;
     color: #161113;
+    font-size: large;
 
     /* text-transform: uppercase; */
 }
@@ -867,7 +868,7 @@ body {
     color: #494949;
 }
 
-#grid-layout {
+.grid-layout {
     /* border: 1px #383838 solid; */
     margin-right: 80px;
     background-color: white;
@@ -1012,3 +1013,92 @@ body {
     /* position: absolute; */
     z-index: 1;
 }
+
+/* OtherList */
+
+#list-tile-other {
+    margin-top: 16%;
+}
+#favourite-button {
+    height: 2em;
+    margin: 3% 0 1% 0;
+    width: 220px;
+    border: 1px solid #408ea3;
+    background-color: #408ea3;
+    color: white;
+}
+
+#favourite-button:hover {
+    border: 1px solid #408ea3;
+    background-color: #408ea3;
+    color: white;
+}
+
+#explore-link-div-other {
+    text-align: right;
+    /* border: 1px #383838 solid; */
+    width: 220px;
+    padding: 5px 5px 5px 8px;
+}
+
+#grid-layout-other {
+    margin-right: 80px;
+}
+.grid-layout {
+    /* border: 1px #383838 solid; */
+    background-color: white;
+    display: grid;
+    padding: 1px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    /* margin-left: 40px; */
+}
+
+#list-item-other {
+    box-sizing: content-box;
+    border: none;
+    height: 185px;
+    width: 185px;
+    margin: 1px;
+}
+
+#other-list-actions {
+    border: 1px solid #161113;
+    text-align: center;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 18px;
+    margin-right: 20px;
+}
+#publish-box-next {
+    /* border: 1px solid red; */
+    height: 30px;
+}
+
+.next-button {
+    border: none;
+    /* width: 185px; */
+    height: 30px;
+    background-color: white;
+    font-size: 17px;
+    float: right;
+    cursor: pointer;
+}
+.publish-box-next:hover {
+    border: 1px solid #408ea3;
+}
+.next-button:hover {
+    /* border: 1px solid #408ea3; */
+    color: #408ea3;
+    /* color: white; */
+}
+#publish-box-previous {
+    border: 1px solid red;
+    height: 30px;
+}
+
+/* REVIEW LIST */
