@@ -418,20 +418,21 @@ export default function AddItems() {
                                 {error}
                             </div>
                         )}
-                        {listItems && listItems[0] && !listItems[2] && (
+                        {listItems && listItems[0] && !listItems[8] && (
                             <div id="clear-items" onClick={clear}>
                                 Start again
                             </div>
                         )}
-                        {listItems && listItems[0] && (
+                        {listItems && listItems[8] && (
                             <Link
                                 to="/reviewList"
                                 style={{
                                     textDecoration: "none",
+                                    color: "black",
                                 }}
                             >
                                 <div id="publish-items" onClick={review}>
-                                    Review list
+                                    Review top9
                                 </div>
                             </Link>
                         )}

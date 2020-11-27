@@ -84,6 +84,15 @@ export default class App extends React.Component {
                                 <p id="favourites-header">Favourites</p>
                             </Link>
                         </div>
+                        <div
+                            style={{
+                                fontSize: "x-large",
+                                color: "#408ea3",
+                                // fontWeight: "650",
+                            }}
+                        >
+                            top9
+                        </div>
                         <div id="header-profile-layout">
                             <p id="header-profile-name">
                                 {this.state.first} {this.state.last}
